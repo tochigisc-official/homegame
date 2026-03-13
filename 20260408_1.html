@@ -54,6 +54,9 @@ img{max-width:100%;height:auto;image-rendering:-webkit-optimize-contrast;image-r
   /* ④タイムスケジュール */
   #schedule img{width:100%!important}
   #schedule [style*="aspect-ratio"]{aspect-ratio:auto!important}
+  /* スマホ：左選手は非表示、右選手は小さく右下に */
+  .sched-player-l{display:none!important}
+  .sched-player-r{width:clamp(80px,22vw,130px)!important;bottom:0!important;right:0!important}
 
   /* ⑤ピックアップイベント */
   #event figure{grid-template-columns:1fr!important;margin:0 0 2em!important}
@@ -190,6 +193,8 @@ img{max-width:100%;height:auto;image-rendering:-webkit-optimize-contrast;image-r
 <article id="schedule" style="background:#FFF100;position:relative;overflow:hidden;padding:0">
   <div style="position:absolute;top:0;right:0;background:url('https://cdn.peraichi.com/userData/5e4de06f-1c70-4b98-a034-24e60a0000c5/img/254db630-f7fc-013e-8f2a-0a58a9feac02/bg_top.png') right center/contain no-repeat;width:30vw;pointer-events:none;aspect-ratio:420/306"></div>
   <div style="position:absolute;bottom:0;left:0;background:url('https://cdn.peraichi.com/userData/5e4de06f-1c70-4b98-a034-24e60a0000c5/img/192ea850-f7fc-013e-8f26-0a58a9feac02/bg_btm.png') left center/contain no-repeat;width:32vw;pointer-events:none;aspect-ratio:447/255"></div>
+  <div class="sched-player-l" style="position:absolute;bottom:0;left:0;width:clamp(100px,14vw,220px);pointer-events:none;z-index:3"><img src="https://i.ibb.co/35z0T1w4/shoji.png" style="width:100%;display:block;object-fit:contain"></div>
+  <div class="sched-player-r" style="position:absolute;bottom:0;right:0;width:clamp(100px,14vw,220px);pointer-events:none;z-index:3"><img src="https://i.ibb.co/zzRjZgm/aoshima.png" style="width:100%;display:block;object-fit:contain"></div>
   <div style="text-align:center;padding:50px 0 30px;position:relative;z-index:2">
     <img src="https://cdn.peraichi.com/userData/5e4de06f-1c70-4b98-a034-24e60a0000c5/img/3bdeb9d0-f7fd-013e-1ae7-0a58a9feac02/ttl_schedule.png" alt="タイムスケジュール" style="height:clamp(60px,8vw,110px);width:auto;display:inline-block">
   </div>
