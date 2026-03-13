@@ -220,16 +220,6 @@ textarea{resize:vertical;min-height:60px;line-height:1.6}
         <div class="or">または 画像URL</div>
         <input type="text" id="scUrl" value="https://i.ibb.co/jvrRFmc5/schedule-1400.png" placeholder="画像URL" oninput="setUrl(this)">
       </div>
-      <div class="fs">
-        <div class="fs-t">選手画像URL（左側）</div>
-        <p style="font-size:10px;color:var(--muted);margin-bottom:8px;line-height:1.6">スケジュールセクション左に表示する選手画像のURL</p>
-        <input type="text" id="scPlayerL" placeholder="画像URL" oninput="up()">
-      </div>
-      <div class="fs">
-        <div class="fs-t">選手画像URL（右側）</div>
-        <p style="font-size:10px;color:var(--muted);margin-bottom:8px;line-height:1.6">スケジュールセクション右に表示する選手画像のURL</p>
-        <input type="text" id="scPlayerR" placeholder="画像URL" oninput="up()">
-      </div>
     </div>
 
     <!-- ピックアップ -->
@@ -722,7 +712,7 @@ function gen(){
   swNum=0; swiperInits=[];  // reset on each render
   const mo=g('mo'),da=g('da'),dw=g('dw'),node=g('matchNode'),ko=g('ko');
   const opp=g('opp'),oppEn=g('oppEn'),oppLabel=g('oppLabel'),tktUrl=g('tktUrl');
-  const h1Src=iS('h1'),h2Src=iS('h2'),scSrc=iS('sc'),scPlayerL=g('scPlayerL'),scPlayerR=g('scPlayerR');
+  const h1Src=iS('h1'),h2Src=iS('h2'),scSrc=iS('sc');
   const visLogo=IS['vis']||g('visUrl')||'';
   const homeLogo=IS['home']||g('homeUrl')||'';
   const spOn=feats['sp'],h1On=feats['h1'];
@@ -849,20 +839,14 @@ ${spOn?`<div style="background:#fff;border-top:2px solid #e0e0e0;border-bottom:2
 </article>
 
 <!-- ④スケジュール -->
-<article id="schedule" class="sched-outer">
-  <div class="sched-bg-top"></div>
-  <div class="sched-bg-btm"></div>
-  <div class="sched-flex">
-    <div class="sched-col-l">${scPlayerL?`<img src="${scPlayerL}" alt="">`:''}</div>
-    <div class="sched-col-center">
-      <div style="text-align:center;padding:50px 0 30px">
-        <img src="https://cdn.peraichi.com/userData/5e4de06f-1c70-4b98-a034-24e60a0000c5/img/3bdeb9d0-f7fd-013e-1ae7-0a58a9feac02/ttl_schedule.png" alt="タイムスケジュール" style="height:clamp(60px,8vw,110px);width:auto;display:inline-block">
-      </div>
-      <div style="max-width:900px;margin:0 auto;padding:0 20px 50px">
-        ${scSrc?`<img src="${scSrc}" style="width:100%;display:block">`:`<div style="background:rgba(26,46,90,.08);padding:60px;text-align:center;color:#005BAC;font-size:13px;font-weight:700">「スケジュール」タブからタイムスケジュール画像をアップロードしてください</div>`}
-      </div>
-    </div>
-    <div class="sched-col-r">${scPlayerR?`<img src="${scPlayerR}" alt="">`:''}</div>
+<article id="schedule" style="background:#FFF100;position:relative;overflow:hidden;padding:0">
+  <div style="position:absolute;top:0;right:0;background:url('${BG.schedTop}') right center/contain no-repeat;width:30vw;pointer-events:none;aspect-ratio:420/306"></div>
+  <div style="position:absolute;bottom:0;left:0;background:url('${BG.schedBtm}') left center/contain no-repeat;width:32vw;pointer-events:none;aspect-ratio:447/255"></div>
+  <div style="text-align:center;padding:50px 0 30px;position:relative;z-index:2">
+    <img src="https://cdn.peraichi.com/userData/5e4de06f-1c70-4b98-a034-24e60a0000c5/img/3bdeb9d0-f7fd-013e-1ae7-0a58a9feac02/ttl_schedule.png" alt="タイムスケジュール" style="height:clamp(60px,8vw,110px);width:auto;display:inline-block">
+  </div>
+  <div style="max-width:900px;margin:0 auto;padding:0 20px 50px;position:relative;z-index:1">
+    ${scSrc?`<img src="${scSrc}" style="width:100%;display:block">`:`<div style="background:rgba(26,46,90,.08);padding:60px;text-align:center;color:#005BAC;font-size:13px;font-weight:700">「スケジュール」タブからタイムスケジュール画像をアップロードしてください</div>`}
   </div>
 </article>
 
@@ -1195,14 +1179,6 @@ img{max-width:100%;height:auto;image-rendering:-webkit-optimize-contrast;image-r
 /* 試合情報エンブレムグリッド：常に3列維持 */
 .day-emblem-grid{display:grid!important;grid-template-columns:minmax(80px,1fr) minmax(260px,50%) minmax(80px,1fr)!important;align-items:center!important}
 
-/* ④スケジュール 選手画像レイアウト */
-.sched-outer{background:#FFF100;position:relative;padding:0}
-.sched-flex{display:flex;align-items:stretch;position:relative;z-index:1}
-.sched-col-l{flex:0 0 clamp(90px,13vw,200px);display:flex;align-items:flex-start;padding-top:30px;pointer-events:none;z-index:3}
-.sched-col-r{flex:0 0 clamp(90px,13vw,200px);display:flex;align-items:flex-end;pointer-events:none;z-index:3}
-.sched-col-l img,.sched-col-r img{width:100%;display:block;object-fit:contain}
-.sched-col-center{flex:1 1 auto;min-width:0}
-
 /* スマホ対応 */
 @media(max-width:768px){
 
@@ -1239,11 +1215,6 @@ img{max-width:100%;height:auto;image-rendering:-webkit-optimize-contrast;image-r
   /* ④タイムスケジュール */
   #schedule img{width:100%!important}
   #schedule [style*="aspect-ratio"]{aspect-ratio:auto!important}
-  /* スマホ：選手画像を上下に配置 */
-  .sched-flex{flex-direction:column!important}
-  .sched-col-l{order:1!important;flex:none!important;width:clamp(80px,38vw,150px)!important;padding-top:0!important;align-self:flex-start!important;margin-left:8px!important}
-  .sched-col-center{order:2!important}
-  .sched-col-r{order:3!important;flex:none!important;width:clamp(80px,38vw,150px)!important;align-self:flex-end!important;margin-right:8px!important}
 
   /* ⑤ピックアップイベント */
   #event figure{grid-template-columns:1fr!important;margin:0 0 2em!important}
@@ -1337,7 +1308,7 @@ function saveJSON(){
     ko:g('ko'), opp:g('opp'), oppEn:g('oppEn'), oppLabel:g('oppLabel'), tktUrl:g('tktUrl'),
     spTxt:g('spTxt'), ctLead:g('ctLead'),
     homeUrl:g('homeUrl'), visUrl:g('visUrl'),
-    h1Url:g('h1Url'), h2Url:g('h2Url'), scUrl:g('scUrl'), scPlayerL:g('scPlayerL'), scPlayerR:g('scPlayerR'),
+    h1Url:g('h1Url'), h2Url:g('h2Url'), scUrl:g('scUrl'),
     spImgUrl:g('spImgUrl'),
     // トグル状態
     feats:{...feats},
@@ -1365,7 +1336,7 @@ function loadJSON(event){
       const d=JSON.parse(e.target.result);
       if(!d.version) throw new Error('形式が違います');
       // 基本情報を復元
-      const fields=['mo','da','dw','matchNode','ko','opp','oppEn','oppLabel','tktUrl','spTxt','ctLead','homeUrl','visUrl','h1Url','h2Url','scUrl','scPlayerL','scPlayerR','spImgUrl'];
+      const fields=['mo','da','dw','matchNode','ko','opp','oppEn','oppLabel','tktUrl','spTxt','ctLead','homeUrl','visUrl','h1Url','h2Url','scUrl','spImgUrl'];
       fields.forEach(id=>{
         const el=document.getElementById(id);
         if(el && d[id]!==undefined) el.value=d[id];
