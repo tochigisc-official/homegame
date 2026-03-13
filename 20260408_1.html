@@ -22,25 +22,22 @@ img{max-width:100%;height:auto;image-rendering:-webkit-optimize-contrast;image-r
 
   /* ②節・対戦情報 */
   #day section{width:100%!important;max-width:100%!important;padding:20px 4% 30px!important}
-  /* スマホ：縦並び（テキスト上→エンブレム下横並び） */
-  .day-emblem-grid{display:flex!important;flex-direction:column!important;gap:24px!important;align-items:stretch!important}
-  /* 中央（テキスト）を最初に表示 */
-  .day-emblem-grid > div:nth-child(2){order:-1!important;width:100%!important}
-  /* HOME・VISITORを横並びにする */
-  .day-emblem-grid > div:first-child,
-  .day-emblem-grid > div:last-child{flex:1!important}
-  /* エンブレム2つを横並びのrowに */
-  .day-emblem-grid{flex-wrap:nowrap!important}
-  .day-emblem-grid > div:first-child,
-  .day-emblem-grid > div:last-child{display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important}
-  /* エンブレムサイズを見本に合わせて大きく */
+  /* スマホ：テキストを先に、エンブレムを後に横並び */
+  .day-emblem-grid{display:grid!important;grid-template-columns:1fr 1fr!important;grid-template-rows:auto auto!important;gap:8px!important}
+  /* テキスト（2番目のdiv）を1行目全幅に */
+  .day-emblem-grid > div:nth-child(2){grid-column:1/3!important;grid-row:1!important}
+  /* HOMEを2行目左に */
+  .day-emblem-grid > div:first-child{grid-column:1!important;grid-row:2!important;text-align:center!important}
+  /* VISITORを2行目右に */
+  .day-emblem-grid > div:last-child{grid-column:2!important;grid-row:2!important;text-align:center!important}
+  /* エンブレムサイズを大きく */
   .day-emblem-grid > div:first-child img,
-  .day-emblem-grid > div:last-child img{width:clamp(110px,28vw,160px)!important;height:clamp(110px,28vw,160px)!important}
-  /* テキストサイズを見本に近づける */
+  .day-emblem-grid > div:last-child img{width:clamp(120px,32vw,180px)!important;height:clamp(120px,32vw,180px)!important}
+  /* テキストサイズを見本に合わせる */
   #day h2{font-size:clamp(16px,6vw,32px)!important}
-  #day h2 span[style*="clamp(32px"]{font-size:clamp(36px,12vw,72px)!important}
-  #day p[style*="clamp(12px,2.8vw"]{font-size:clamp(13px,4vw,18px)!important;font-weight:700!important}
-  #day p[style*="clamp(12px,3vw"]{font-size:clamp(14px,4.5vw,20px)!important;font-weight:800!important}
+  #day h2 span[style*="clamp(32px"]{font-size:clamp(40px,13vw,80px)!important}
+  #day p[style*="clamp(12px,2.8vw"]{font-size:clamp(14px,4vw,20px)!important;font-weight:700!important}
+  #day p[style*="clamp(12px,3vw"]{font-size:clamp(15px,4.5vw,22px)!important;font-weight:800!important}
   #day [style*="HOME GAME"]{font-size:clamp(48px,20vw,100px)!important}
 
   /* ③コンテンツナビ */
