@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>栃木SC｜ホームゲームLP ジェネレーター v3</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&family=Barlow+Condensed:ital,wght@1,700;1,900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <style>
@@ -750,7 +750,7 @@ function gen(){
   ${hasNav?`<div style="text-align:center;padding-bottom:20px"><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#fff;margin:0 4px"></span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#888;margin:0 4px"></span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#888;margin:0 4px"></span></div>`:''}`;
 
   return`<div style="font-family:'Noto Sans JP',sans-serif;color:#0A1F3A;line-height:1.6">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&family=Barlow+Condensed:ital,wght@1,700;1,900&display=swap" rel="stylesheet">
 <style>
 .swiper-pagination-bullet{background:#aaa;opacity:1;width:12px;height:12px}
 .swiper-pagination-bullet-active{background:#0A1F3A}
@@ -791,7 +791,7 @@ ${h1On
           <div style="font-size:clamp(12px,2.5vw,16px);margin-top:10px;font-weight:900;font-style:italic;letter-spacing:1px">HOME</div>
         </div>
         <div style="text-align:center;min-width:0">
-          <h2 style="font-style:italic;font-weight:700;font-size:clamp(16px,4vw,60px);line-height:1.1;color:#FFF100">2026.<span style="font-size:clamp(32px,9vw,110px)">${mo}.${da}</span><span style="font-size:clamp(14px,3.5vw,36px);color:rgba(255,255,255,.8)">${dw}</span></h2>
+          <h2 style="font-family:'Barlow Condensed',sans-serif;font-style:italic;font-weight:900;font-size:clamp(16px,4vw,60px);line-height:1.1;color:#FFF100">2026.<span style="font-size:clamp(32px,9vw,110px)">${mo}.${da}</span><span style="font-size:clamp(14px,3.5vw,36px);color:rgba(255,255,255,.8)">${dw}</span></h2>
           <p style="font-size:clamp(12px,2.8vw,28px);margin-bottom:8px">${ko}キックオフ<br>カンセキスタジアムとちぎ</p>
           <p style="font-size:clamp(12px,3vw,26px);font-weight:800">栃木ＳＣ vs ${opp}</p>
           <div style="margin-top:16px"><a href="${tktUrl}" style="background:#0A1F3A;color:#fff;font-size:clamp(12px,2.5vw,15px);font-weight:700;padding:clamp(10px,2vw,14px) clamp(20px,4vw,40px);display:inline-block;letter-spacing:1px">チケットを買う ▶</a></div>
@@ -1164,7 +1164,7 @@ function getFull(){
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="format-detection" content="telephone=no">
 <title>【栃木SCホームゲーム】${g('mo')}/${g('da')}(${g('dw').toUpperCase()}) ${g('opp')}戦 開催情報</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&family=Barlow+Condensed:ital,wght@1,700;1,900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"><\/script>
 <style>
@@ -1193,8 +1193,8 @@ img{max-width:100%;height:auto;image-rendering:-webkit-optimize-contrast;image-r
   .day-emblem-grid > div:first-child img,
   .day-emblem-grid > div:last-child img{width:clamp(120px,32vw,180px)!important;height:clamp(120px,32vw,180px)!important}
   /* テキストサイズを見本に合わせる */
-  #day h2{font-size:clamp(16px,6vw,32px)!important}
-  #day h2 span[style*="clamp(32px"]{font-size:clamp(40px,13vw,80px)!important}
+  #day h2{font-size:clamp(16px,6vw,32px)!important;font-family:'Barlow Condensed',sans-serif!important;font-style:italic!important;font-weight:900!important}
+  #day h2 span[style*="clamp(32px"]{font-size:clamp(50px,16vw,100px)!important;font-family:'Barlow Condensed',sans-serif!important}
   #day p[style*="clamp(12px,2.8vw"]{font-size:clamp(14px,4vw,20px)!important;font-weight:700!important}
   #day p[style*="clamp(12px,3vw"]{font-size:clamp(15px,4.5vw,22px)!important;font-weight:800!important}
   #day [style*="HOME GAME"]{font-size:clamp(48px,20vw,100px)!important}
