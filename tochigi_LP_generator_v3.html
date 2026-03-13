@@ -778,7 +778,7 @@ ${h1On
   <div style="position:absolute;top:0;right:0;background:url('${BG.bgRight}') right top/contain no-repeat;width:35vw;height:100%;pointer-events:none;opacity:.6"></div>
   ${h2Src
     ? `<div style="position:relative;z-index:2"><img src="${h2Src}" style="width:100%;display:block;aspect-ratio:8000/4500;object-fit:cover"></div>`
-    : `<section style="width:80%;max-width:1000px;margin:0 auto;padding:40px 20px;position:relative;z-index:2">
+    : `<section style="width:90%;max-width:1100px;margin:0 auto;padding:40px 20px;position:relative;z-index:2">
       <p style="font-size:clamp(13px,1vw,18px);text-align:center;letter-spacing:.2em;margin-bottom:10px">MEIJI YASUDA J.LEAGUE 100 YEAR VISION LEAGUE</p>
       <p style="text-align:center;font-size:clamp(20px,2.8vw,36px);letter-spacing:.15em;margin-bottom:20px">
         <img src="${BG.wingL}" style="width:2.6vw;max-width:36px;vertical-align:middle;margin-right:8px" alt="">
@@ -787,13 +787,13 @@ ${h1On
       </p>
       <!-- HOME GAME透過テキスト -->
       <div style="position:absolute;bottom:0;left:0;right:0;font-size:clamp(60px,12vw,160px);font-weight:900;font-style:italic;color:rgba(255,255,255,0.08);letter-spacing:4px;text-align:center;line-height:1;pointer-events:none;z-index:0;font-family:sans-serif">HOME GAME</div>
-      <div style="display:grid;grid-template-columns:1fr minmax(220px,42%) 1fr;align-items:center;gap:clamp(8px,2vw,20px);margin-bottom:30px;position:relative;z-index:1" class="day-emblem-grid">
+      <div style="display:grid;grid-template-columns:minmax(80px,1fr) minmax(260px,50%) minmax(80px,1fr);align-items:center;gap:clamp(4px,1.5vw,16px);margin-bottom:30px;position:relative;z-index:1" class="day-emblem-grid">
         <div style="text-align:center">
           ${homeLogo?`<img src="${homeLogo}" style="width:clamp(90px,20vw,160px);height:clamp(90px,20vw,160px);object-fit:contain;margin:0 auto;display:block">`:`<div style="width:clamp(90px,20vw,160px);height:clamp(90px,20vw,160px);border-radius:50%;border:2px solid rgba(255,255,255,.4);margin:0 auto;display:flex;align-items:center;justify-content:center;font-size:clamp(14px,3.5vw,18px);font-weight:700;color:#fff;font-style:italic">HOME</div>`}
           <div style="font-size:clamp(12px,2.5vw,16px);margin-top:10px;font-weight:900;font-style:italic;letter-spacing:1px">HOME</div>
         </div>
         <div style="text-align:center;min-width:0">
-          <h2 style="font-family:'gomme-sans','Barlow Condensed',sans-serif;font-style:italic;font-weight:700;font-size:clamp(20px,5.5vw,60px);line-height:1.1;color:#FFF100">2026.<span style="font-size:clamp(32px,9vw,110px);font-weight:700">${mo}.${da}</span><span style="font-size:clamp(20px,5.5vw,60px);font-weight:700;color:rgba(255,255,255,.8)">${dw}</span></h2>
+          <h2 style="font-family:'gomme-sans','Barlow Condensed',sans-serif;font-style:italic;font-weight:700;font-size:clamp(20px,5.5vw,60px);line-height:1;color:#FFF100;white-space:nowrap;overflow:visible">2026.<span style="font-size:clamp(32px,9vw,110px);font-weight:700">${mo}.${da}</span><span style="font-size:clamp(20px,5.5vw,60px);font-weight:700;color:rgba(255,255,255,.8)">${dw}</span></h2>
           <p style="font-size:clamp(12px,2.8vw,28px);margin-bottom:8px">${ko}キックオフ<br>カンセキスタジアムとちぎ</p>
           <p style="font-size:clamp(12px,3vw,26px);font-weight:800">栃木ＳＣ vs ${opp}</p>
           <div style="margin-top:16px"><a href="${tktUrl}" style="background:#0A1F3A;color:#fff;font-size:clamp(12px,2.5vw,15px);font-weight:700;padding:clamp(10px,2vw,14px) clamp(20px,4vw,40px);display:inline-block;letter-spacing:1px">チケットを買う ▶</a></div>
@@ -1177,7 +1177,7 @@ html{font-size:16px}
 body{width:100%;max-width:100%;overflow-x:hidden}
 img{max-width:100%;height:auto;image-rendering:-webkit-optimize-contrast;image-rendering:crisp-edges}
 /* 試合情報エンブレムグリッド：常に3列維持 */
-.day-emblem-grid{display:grid!important;grid-template-columns:1fr minmax(200px,40%) 1fr!important;align-items:center!important}
+.day-emblem-grid{display:grid!important;grid-template-columns:minmax(80px,1fr) minmax(260px,50%) minmax(80px,1fr)!important;align-items:center!important}
 
 /* スマホ対応 */
 @media(max-width:768px){
