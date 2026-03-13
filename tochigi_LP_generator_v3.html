@@ -1181,17 +1181,26 @@ img{max-width:100%;height:auto;image-rendering:-webkit-optimize-contrast;image-r
 
   /* ②節・対戦情報 */
   #day section{width:100%!important;max-width:100%!important;padding:20px 4% 30px!important}
-  /* スマホ：テキスト上・エンブレム下の縦並びに */
-  .day-emblem-grid{display:flex!important;flex-wrap:wrap!important;gap:16px 0!important}
+  /* スマホ：縦並び（テキスト上→エンブレム下横並び） */
+  .day-emblem-grid{display:flex!important;flex-direction:column!important;gap:24px!important;align-items:stretch!important}
+  /* 中央（テキスト）を最初に表示 */
   .day-emblem-grid > div:nth-child(2){order:-1!important;width:100%!important}
+  /* HOME・VISITORを横並びにする */
   .day-emblem-grid > div:first-child,
-  .day-emblem-grid > div:last-child{flex:1!important;min-width:40%!important}
+  .day-emblem-grid > div:last-child{flex:1!important}
+  /* エンブレム2つを横並びのrowに */
+  .day-emblem-grid{flex-wrap:nowrap!important}
+  .day-emblem-grid > div:first-child,
+  .day-emblem-grid > div:last-child{display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important}
+  /* エンブレムサイズを見本に合わせて大きく */
   .day-emblem-grid > div:first-child img,
-  .day-emblem-grid > div:last-child img{width:clamp(80px,22vw,130px)!important;height:clamp(80px,22vw,130px)!important}
-  #day h2{font-size:clamp(14px,5vw,28px)!important}
-  #day h2 span[style*="clamp(32px"]{font-size:clamp(28px,9vw,52px)!important}
-  #day p[style*="clamp(12px,2.8vw"]{font-size:clamp(12px,3.5vw,16px)!important}
-  #day p[style*="clamp(12px,3vw"]{font-size:clamp(12px,3.5vw,18px)!important}
+  .day-emblem-grid > div:last-child img{width:clamp(110px,28vw,160px)!important;height:clamp(110px,28vw,160px)!important}
+  /* テキストサイズを見本に近づける */
+  #day h2{font-size:clamp(16px,6vw,32px)!important}
+  #day h2 span[style*="clamp(32px"]{font-size:clamp(36px,12vw,72px)!important}
+  #day p[style*="clamp(12px,2.8vw"]{font-size:clamp(13px,4vw,18px)!important;font-weight:700!important}
+  #day p[style*="clamp(12px,3vw"]{font-size:clamp(14px,4.5vw,20px)!important;font-weight:800!important}
+  #day [style*="HOME GAME"]{font-size:clamp(48px,20vw,100px)!important}
 
   /* ③コンテンツナビ */
   #nav [style*="width:72%"]{width:100%!important;max-width:100%!important;padding:0 0 80px!important}
