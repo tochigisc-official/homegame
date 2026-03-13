@@ -1281,8 +1281,8 @@ function cpHTML(){navigator.clipboard.writeText(getFull()).then(()=>toast('✓ H
 function dl(){
   const b=new Blob([getFull()],{type:'text/html'});
   const a=document.createElement('a');a.href=URL.createObjectURL(b);
-  const oppForFile=g('opp')?g('opp').replace(/[\s　]/g,''):'match';
-  a.download=`${oppForFile}_${g('mo')}${g('da')}.html`;a.click();
+  const mo2=g('mo').padStart(2,'0'),da2=g('da').padStart(2,'0'),node2=g('matchNode').replace(/[^0-9]/g,'');
+  a.download=`2026${mo2}${da2}${node2?'_'+node2:''}.html`;a.click();
   toast('⬇ ダウンロードしました');
 }
 
