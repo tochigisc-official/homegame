@@ -150,7 +150,7 @@ textarea{resize:vertical;min-height:60px;line-height:1.6}
         </div>
         <div class="fr"><label>対戦相手（日本語）</label><input type="text" id="opp" value="" oninput="up()"></div>
         <div class="fr"><label>対戦相手（英語）</label><input type="text" id="oppEn" value="" oninput="up()"></div>
-        <div class="fr"><label>ビジター表示名（例：TOCHIGI CITY／栃木シティ）</label><input type="text" id="oppLabel" value="" placeholder="例：TOCHIGI CITY／栃木シティ" oninput="up()"></div>
+        <div class="fr"><label>ビジター表示名（正式名称）</label><input type="text" id="oppLabel" value="" placeholder="正式名称" oninput="up()"></div>
         <div class="fr"><label>チケットURL</label><input type="text" id="tktUrl" value="https://www.jleague-ticket.jp/club/ts/" oninput="up()"></div>
       </div>
       <div class="fs">
@@ -164,8 +164,8 @@ textarea{resize:vertical;min-height:60px;line-height:1.6}
           <div class="fr"><label>帯画像（ロゴなど）</label>
             <div class="ia" id="sp-ia"><input type="file" accept="image/*" onchange="hi(event,'sp')"><div class="ia-ic">🏷</div><div class="ia-lb">クリックしてアップロード</div></div>
             <div class="ia-prev" id="sp-prev"><img id="sp-img" src="" alt=""><button class="rm" onclick="ri('sp')">✕</button></div>
-            <div class="or">または URL</div>
-            <input type="text" id="spImgUrl" placeholder="https:// または Google Drive URL" oninput="setUrl(this)">
+            <div class="or">または 画像URL</div>
+            <input type="text" id="spImgUrl" placeholder="画像URL" oninput="setUrl(this)">
           </div>
         </div>
       </div>
@@ -178,8 +178,8 @@ textarea{resize:vertical;min-height:60px;line-height:1.6}
         <div class="fr"><label>ビジターチーム エンブレム</label>
           <div class="ia" id="vis-ia"><input type="file" accept="image/*" onchange="hi(event,'vis')"><div class="ia-ic">🏆</div><div class="ia-lb">ビジターエンブレム</div></div>
           <div class="ia-prev" id="vis-prev"><img id="vis-img" src="" alt=""><button class="rm" onclick="ri('vis')">✕</button></div>
-          <div class="or">または URL</div>
-          <input type="text" id="visUrl" placeholder="https:// または Google Drive URL" oninput="setUrl(this)">
+          <div class="or">または 画像URL</div>
+          <input type="text" id="visUrl" placeholder="画像URL" oninput="setUrl(this)">
         </div>
       </div>
     </div>
@@ -196,8 +196,8 @@ textarea{resize:vertical;min-height:60px;line-height:1.6}
         <div id="h1-f">
           <div class="ia" id="h1-ia"><input type="file" accept="image/*" onchange="hi(event,'h1')"><div class="ia-ic">🖼</div><div class="ia-lb">クリックまたはドロップ</div></div>
           <div class="ia-prev" id="h1-prev"><img id="h1-img" src="" alt=""><button class="rm" onclick="ri('h1')">✕</button></div>
-          <div class="or">または URL（Google Drive等）</div>
-          <input type="text" id="h1Url" placeholder="https:// または Google Drive URL" oninput="setUrl(this)">
+          <div class="or">または 画像URL</div>
+          <input type="text" id="h1Url" placeholder="画像URL" oninput="setUrl(this)">
         </div>
       </div>
       <div class="fs">
@@ -205,8 +205,8 @@ textarea{resize:vertical;min-height:60px;line-height:1.6}
         <p style="font-size:10px;color:var(--muted);margin-bottom:8px;line-height:1.6">「第7節」対戦カード画像。毎試合差し替え。<br>青背景セクション全幅で表示されます。</p>
         <div class="ia" id="h2-ia"><input type="file" accept="image/*" onchange="hi(event,'h2')"><div class="ia-ic">🖼</div><div class="ia-lb">節・対戦カード画像</div></div>
         <div class="ia-prev" id="h2-prev"><img id="h2-img" src="" alt=""><button class="rm" onclick="ri('h2')">✕</button></div>
-        <div class="or">または URL</div>
-        <input type="text" id="h2Url" placeholder="https:// または Google Drive URL" oninput="setUrl(this)">
+        <div class="or">または 画像URL</div>
+        <input type="text" id="h2Url" placeholder="画像URL" oninput="setUrl(this)">
       </div>
     </div>
 
@@ -217,8 +217,8 @@ textarea{resize:vertical;min-height:60px;line-height:1.6}
         <p style="font-size:10px;color:var(--muted);margin-bottom:8px;line-height:1.6">KO時間別に事前作成しておき、差し替えてください。</p>
         <div class="ia" id="sc-ia"><input type="file" accept="image/*" onchange="hi(event,'sc')"><div class="ia-ic">🗓</div><div class="ia-lb">スケジュール画像をアップロード</div></div>
         <div class="ia-prev" id="sc-prev"><img id="sc-img" src="" alt=""><button class="rm" onclick="ri('sc')">✕</button></div>
-        <div class="or">または URL</div>
-        <input type="text" id="scUrl" placeholder="https:// または Google Drive URL" oninput="setUrl(this)">
+        <div class="or">または 画像URL</div>
+        <input type="text" id="scUrl" value="https://i.ibb.co/jvrRFmc5/schedule-1400.png" placeholder="画像URL" oninput="setUrl(this)">
       </div>
     </div>
 
@@ -427,8 +427,8 @@ function rPu(){
       <div class="fr"><label>画像</label>
         <div class="ia"><input type="file" accept="image/*" onchange="hdi(event,'pu',${i})"><div class="ia-ic">📷</div><div class="ia-lb">クリック or ドロップ</div></div>
         ${p.img?`<img src="${p.img}" style="width:100%;max-height:80px;object-fit:cover;margin-top:4px">`:''}
-        <div class="or">または URL</div>
-        <input type="text" value="${p.imgUrl}" placeholder="https:// またはGoogle Drive URL" oninput="setUrl(this,function(v){pus[${i}].imgUrl=v;})">
+        <div class="or">または 画像URL</div>
+        <input type="text" value="${p.imgUrl}" placeholder="画像URL" oninput="setUrl(this,function(v){pus[${i}].imgUrl=v;})">
       </div>
       <div class="fr"><label>イベントタイトル</label><textarea oninput="pus[${i}].title=this.value;up()">${p.title}</textarea></div>
       <div class="fr"><label>説明文（任意）</label><textarea oninput="pus[${i}].desc=this.value;up()">${p.desc}</textarea></div>
@@ -449,8 +449,8 @@ function rCt(){
       <div class="fr"><label>画像</label>
         <div class="ia"><input type="file" accept="image/*" onchange="hdi(event,'ct',${i})"><div class="ia-ic">📷</div><div class="ia-lb">クリック or ドロップ</div></div>
         ${c.img?`<img src="${c.img}" style="width:100%;max-height:80px;object-fit:cover;margin-top:4px">`:''}
-        <div class="or">または URL</div>
-        <input type="text" value="${c.imgUrl}" placeholder="https:// またはGoogle Drive URL" oninput="setUrl(this,function(v){cts[${i}].imgUrl=v;})">
+        <div class="or">または 画像URL</div>
+        <input type="text" value="${c.imgUrl}" placeholder="画像URL" oninput="setUrl(this,function(v){cts[${i}].imgUrl=v;})">
       </div>
       <div class="fr"><label>タイトル（最大20文字）</label>
         <input type="text" value="${c.title}" maxlength="20" oninput="cts[${i}].title=this.value;up()">
@@ -480,8 +480,8 @@ function rOt(){
       <div class="fr"><label>画像</label>
         <div class="ia"><input type="file" accept="image/*" onchange="hdi(event,'ot',${i})"><div class="ia-ic">📷</div><div class="ia-lb">クリック or ドロップ</div></div>
         ${o.img?`<img src="${o.img}" style="width:100%;max-height:80px;object-fit:cover;margin-top:4px">`:''}
-        <div class="or">または URL</div>
-        <input type="text" value="${o.imgUrl}" placeholder="https:// またはGoogle Drive URL" oninput="setUrl(this,function(v){ots[${i}].imgUrl=v;})">
+        <div class="or">または 画像URL</div>
+        <input type="text" value="${o.imgUrl}" placeholder="画像URL" oninput="setUrl(this,function(v){ots[${i}].imgUrl=v;})">
       </div>
       <div class="fr"><label>イベント名（最大20文字）</label>
         <input type="text" value="${o.title}" maxlength="20" oninput="ots[${i}].title=this.value;up()">
@@ -506,8 +506,8 @@ function rGm(){
       <div class="fr"><label>画像</label>
         <div class="ia"><input type="file" accept="image/*" onchange="hdi(event,'gm',${i})"><div class="ia-ic">🍽</div><div class="ia-lb">料理画像</div></div>
         ${m.img?`<img src="${m.img}" style="width:100%;max-height:80px;object-fit:cover;margin-top:4px">`:''}
-        <div class="or">または URL</div>
-        <input type="text" value="${m.imgUrl}" placeholder="https:// またはGoogle Drive URL" oninput="setUrl(this,function(v){gms[${i}].imgUrl=v;})">
+        <div class="or">または 画像URL</div>
+        <input type="text" value="${m.imgUrl}" placeholder="画像URL" oninput="setUrl(this,function(v){gms[${i}].imgUrl=v;})">
       </div>
       <div class="fr"><label>料理名（最大20文字）</label><input type="text" value="${m.title}" maxlength="20" oninput="gms[${i}].title=this.value;up()"></div>
       <div class="fr"><label>説明文（最大80文字）</label><textarea maxlength="80" oninput="gms[${i}].desc=this.value;up()" style="min-height:52px">${m.desc||''}</textarea></div>
@@ -528,8 +528,8 @@ function rGd(){
       <div class="fr"><label>画像</label>
         <div class="ia"><input type="file" accept="image/*" onchange="hdi(event,'gd',${i})"><div class="ia-ic">🛍</div><div class="ia-lb">グッズ画像</div></div>
         ${d.img?`<img src="${d.img}" style="width:100%;max-height:80px;object-fit:cover;margin-top:4px">`:''}
-        <div class="or">または URL</div>
-        <input type="text" value="${d.imgUrl}" placeholder="https:// またはGoogle Drive URL" oninput="setUrl(this,function(v){gds[${i}].imgUrl=v;})">
+        <div class="or">または 画像URL</div>
+        <input type="text" value="${d.imgUrl}" placeholder="画像URL" oninput="setUrl(this,function(v){gds[${i}].imgUrl=v;})">
       </div>
       <div class="fr"><label>グッズ名（最大20文字）</label><input type="text" value="${d.title}" maxlength="20" oninput="gds[${i}].title=this.value;up()"></div>
       <div class="fr"><label>説明文（最大80文字）</label><textarea maxlength="80" oninput="gds[${i}].desc=this.value;up()" style="min-height:52px">${d.desc||''}</textarea></div>
