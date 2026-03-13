@@ -1180,16 +1180,18 @@ img{max-width:100%;height:auto;image-rendering:-webkit-optimize-contrast;image-r
 @media(max-width:768px){
 
   /* ②節・対戦情報 */
-  #day article > *{min-width:0!important}
-  #day section{width:100%!important;max-width:100%!important;padding:16px 3% 24px!important}
-  #day [style*="display:flex"]{flex-wrap:wrap!important;gap:8px!important}
-  .day-emblem-grid{gap:4px!important}
+  #day section{width:100%!important;max-width:100%!important;padding:20px 4% 30px!important}
+  /* スマホ：テキスト上・エンブレム下の縦並びに */
+  .day-emblem-grid{display:flex!important;flex-wrap:wrap!important;gap:16px 0!important}
+  .day-emblem-grid > div:nth-child(2){order:-1!important;width:100%!important}
+  .day-emblem-grid > div:first-child,
+  .day-emblem-grid > div:last-child{flex:1!important;min-width:40%!important}
   .day-emblem-grid > div:first-child img,
-  .day-emblem-grid > div:last-child img{width:clamp(54px,13vw,80px)!important;height:clamp(54px,13vw,80px)!important}
-  #day h2{font-size:clamp(12px,4vw,22px)!important}
-  #day h2 span[style*="clamp(32px"]{font-size:clamp(22px,7vw,38px)!important}
-  #day p[style*="clamp(12px,2.8vw"]{font-size:clamp(10px,3vw,14px)!important}
-  #day p[style*="clamp(12px,3vw"]{font-size:clamp(10px,3vw,14px)!important}
+  .day-emblem-grid > div:last-child img{width:clamp(80px,22vw,130px)!important;height:clamp(80px,22vw,130px)!important}
+  #day h2{font-size:clamp(14px,5vw,28px)!important}
+  #day h2 span[style*="clamp(32px"]{font-size:clamp(28px,9vw,52px)!important}
+  #day p[style*="clamp(12px,2.8vw"]{font-size:clamp(12px,3.5vw,16px)!important}
+  #day p[style*="clamp(12px,3vw"]{font-size:clamp(12px,3.5vw,18px)!important}
 
   /* ③コンテンツナビ */
   #nav [style*="width:72%"]{width:100%!important;max-width:100%!important;padding:0 0 80px!important}
@@ -1279,7 +1281,8 @@ function cpHTML(){navigator.clipboard.writeText(getFull()).then(()=>toast('✓ H
 function dl(){
   const b=new Blob([getFull()],{type:'text/html'});
   const a=document.createElement('a');a.href=URL.createObjectURL(b);
-  a.download=`${g('oppEn')?g('oppEn').toLowerCase().replace(/\s+/g,'_')+'_':''}${g('mo')}${g('da')}.html`;a.click();
+  const oppForFile=g('opp')?g('opp').replace(/[\s　]/g,''):'match';
+  a.download=`${oppForFile}_${g('mo')}${g('da')}.html`;a.click();
   toast('⬇ ダウンロードしました');
 }
 
