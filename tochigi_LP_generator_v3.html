@@ -46,6 +46,7 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--txt)
 .fs-t{font-size:9px;font-weight:700;letter-spacing:3px;color:var(--s);text-transform:uppercase;margin-bottom:10px;display:flex;align-items:center;gap:6px}
 .fs-t::after{content:'';flex:1;height:1px;background:var(--bdr)}
 .fr{margin-bottom:10px}
+.fr-help{font-size:9px;color:var(--muted);margin-top:3px;line-height:1.5;padding-left:2px}
 label{display:block;font-size:9px;font-weight:700;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-bottom:4px}
 input[type=text],textarea,select{width:100%;background:#1e2130;border:1px solid var(--bdr);color:var(--txt);padding:8px 10px;font-family:'Noto Sans JP',sans-serif;font-size:12px;outline:none;transition:border-color .2s;border-radius:0;appearance:none}
 input:focus,textarea:focus,select:focus{border-color:var(--s)}
@@ -140,18 +141,18 @@ textarea{resize:vertical;min-height:60px;line-height:1.6}
       <div class="fs">
         <div class="fs-t">試合情報</div>
         <div class="fr3">
-          <div class="fr"><label>月</label><input type="text" id="mo" value="" oninput="up()"></div>
-          <div class="fr"><label>日</label><input type="text" id="da" value="" oninput="up()"></div>
-          <div class="fr"><label>曜日(EN)</label><input type="text" id="dw" value="" oninput="up()"></div>
+          <div class="fr"><label>月</label><input type="text" id="mo" value="" oninput="up()" placeholder="例: 4"><p class="fr-help">半角数字で入力（例: 4）</p></div>
+          <div class="fr"><label>日</label><input type="text" id="da" value="" oninput="up()" placeholder="例: 8"><p class="fr-help">半角数字で入力（例: 8）</p></div>
+          <div class="fr"><label>曜日(EN)</label><input type="text" id="dw" value="" oninput="up()" placeholder="例: SUN"><p class="fr-help">英語大文字（MON/TUE/WED/THU/FRI/SAT/SUN）</p></div>
         </div>
         <div class="fr2">
-          <div class="fr"><label>節（例：第7節）</label><input type="text" id="matchNode" value="" oninput="up()"></div>
-          <div class="fr"><label>KOタイム</label><input type="text" id="ko" value="" oninput="up()"></div>
+          <div class="fr"><label>節（例：第7節）</label><input type="text" id="matchNode" value="" oninput="up()" placeholder="例: 第7節"><p class="fr-help">「第〇節」の形式で入力。ファイル名にも使用されます</p></div>
+          <div class="fr"><label>KOタイム</label><input type="text" id="ko" value="" oninput="up()" placeholder="例: 14:00"><p class="fr-help">キックオフ時間を「14:00」形式で入力</p></div>
         </div>
-        <div class="fr"><label>対戦相手（日本語）</label><input type="text" id="opp" value="" oninput="up()"></div>
-        <div class="fr"><label>対戦相手（英語）</label><input type="text" id="oppEn" value="" oninput="up()"></div>
-        <div class="fr"><label>ビジター表示名（正式名称）</label><input type="text" id="oppLabel" value="" placeholder="正式名称" oninput="up()"></div>
-        <div class="fr"><label>チケットURL</label><input type="text" id="tktUrl" value="https://www.jleague-ticket.jp/club/ts/" oninput="up()"></div>
+        <div class="fr"><label>対戦相手（日本語）</label><input type="text" id="opp" value="" oninput="up()" placeholder="例: ヴァンラーレ八戸"><p class="fr-help">チーム名（日本語）。ファイル名にも使用されます</p></div>
+        <div class="fr"><label>対戦相手（英語）</label><input type="text" id="oppEn" value="" oninput="up()" placeholder="例: VANRAURE HACHINOHE"><p class="fr-help">英語大文字。ページデザインの英字部分に表示されます</p></div>
+        <div class="fr"><label>ビジター表示名（正式名称）</label><input type="text" id="oppLabel" value="" placeholder="例: ヴァンラーレ八戸FC" oninput="up()"><p class="fr-help">ビジター席案内に使用する正式クラブ名</p></div>
+        <div class="fr"><label>チケットURL</label><input type="text" id="tktUrl" value="https://www.jleague-ticket.jp/club/ts/" oninput="up()"><p class="fr-help">Jリーグチケットの試合ページURL。試合ごとに差し替えてください</p></div>
       </div>
       <div class="fs">
         <div class="fs-t">スペシャルマッチ帯</div>
@@ -160,7 +161,7 @@ textarea{resize:vertical;min-height:60px;line-height:1.6}
           <span class="tog-lb">スペシャルマッチ帯を表示</span>
         </div>
         <div id="sp-f">
-          <div class="fr"><label>帯テキスト</label><input type="text" id="spTxt" value="" oninput="up()"></div>
+          <div class="fr"><label>帯テキスト</label><input type="text" id="spTxt" value="" oninput="up()" placeholder="例: ファン感謝デー開催！"><p class="fr-help">ページ上部の告知テキスト（記念マッチ名など）</p></div>
           <div class="fr"><label>帯画像（ロゴなど）</label>
             <div class="ia" id="sp-ia"><input type="file" accept="image/*" onchange="hi(event,'sp')"><div class="ia-ic">🏷</div><div class="ia-lb">クリックしてアップロード</div></div>
             <div class="ia-prev" id="sp-prev"><img id="sp-img" src="" alt=""><button class="rm" onclick="ri('sp')">✕</button></div>
@@ -280,7 +281,10 @@ textarea{resize:vertical;min-height:60px;line-height:1.6}
   <div class="pv">
     <div class="pv-bar">
       <div class="pv-lb">ライブプレビュー</div>
-      <span style="font-size:9px;color:var(--muted);letter-spacing:1px">入力内容がリアルタイムで反映されます</span>
+      <div style="display:flex;gap:6px;align-items:center">
+        <button class="btn btn-g" onclick="openPreviewPC()" style="font-size:9px;padding:4px 10px">🖥 PC表示</button>
+        <button class="btn btn-g" onclick="openPreviewSP()" style="font-size:9px;padding:4px 10px">📱 スマホ表示</button>
+      </div>
     </div>
     <div class="pv-frame" id="pvf"></div>
   </div>
@@ -297,6 +301,34 @@ textarea{resize:vertical;min-height:60px;line-height:1.6}
     </div>
   </div>
 </div>
+<!-- PC プレビューモーダル -->
+<div id="pc-pv-ov" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.9);z-index:3000;flex-direction:column;align-items:center;justify-content:flex-start;padding-top:20px;overflow:auto">
+  <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
+    <span style="color:#fff;font-size:11px;font-weight:700;letter-spacing:2px">🖥 PCプレビュー</span>
+    <button onclick="closePvPC()" style="background:#444;color:#fff;border:none;padding:5px 14px;cursor:pointer;font-size:11px;font-weight:700">✕ 閉じる</button>
+  </div>
+  <div style="width:min(1100px,96vw);background:#fff;overflow:hidden">
+    <iframe id="pc-pv-frame" style="width:1100px;height:85vh;border:none;display:block;transform-origin:top left"></iframe>
+  </div>
+</div>
+
+<!-- SP プレビューモーダル -->
+<div id="sp-pv-ov" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.9);z-index:3000;flex-direction:column;align-items:center;justify-content:center">
+  <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
+    <span style="color:#fff;font-size:11px;font-weight:700;letter-spacing:2px">📱 スマホプレビュー（375px）</span>
+    <button onclick="closePvSP()" style="background:#444;color:#fff;border:none;padding:5px 14px;cursor:pointer;font-size:11px;font-weight:700">✕ 閉じる</button>
+  </div>
+  <div style="background:#222;padding:14px 8px;border-radius:8px;box-shadow:0 0 0 2px #555">
+    <div style="width:375px;height:72vh;overflow:hidden;border-radius:4px;background:#fff">
+      <iframe id="sp-pv-frame" style="width:375px;height:72vh;border:none;display:block"></iframe>
+    </div>
+    <div style="text-align:center;margin-top:8px;display:flex;gap:8px;justify-content:center">
+      <button onclick="spScroll(-300)" style="background:#444;color:#fff;border:none;padding:5px 18px;cursor:pointer;font-size:13px">↑</button>
+      <button onclick="spScroll(300)" style="background:#444;color:#fff;border:none;padding:5px 18px;cursor:pointer;font-size:13px">↓</button>
+    </div>
+  </div>
+</div>
+
 <div class="toast" id="toast"></div>
 
 <script>
@@ -1112,12 +1144,14 @@ function up(){
       if(el.swiper) el.swiper.destroy(true,true);
       // loopはスライド数がslidesPerView(3)より多い場合のみ有効
       // PC: 4枚以上でloop, スマホ: slidesPerViewを枚数に合わせる
-      const useLoop = count >= 4;
+      const pcView = Math.min(count, 3);
+      const useLoop = count >= Math.max(pcView * 2 + 1, 4);
+      const useRewind = !useLoop && count > 1;
       new Swiper('#'+id,{
-        slidesPerView:1,loop:useLoop,speed:1000,spaceBetween:16,
+        slidesPerView:1,loop:useLoop,rewind:useRewind,speed:1000,spaceBetween:16,
         watchOverflow:false,
-        autoplay:useLoop?{delay:3000,disableOnInteraction:false}:false,
-        breakpoints:{768:{slidesPerView:Math.min(count,3),spaceBetween:40}},
+        autoplay:count>=2?{delay:3000,disableOnInteraction:false}:false,
+        breakpoints:{768:{slidesPerView:pcView,spaceBetween:40}},
         navigation:{prevEl:'#'+id+'-prev',nextEl:'#'+id+'-next'},
         pagination:{
           el:'#'+id+'-pager',clickable:true,
@@ -1142,14 +1176,18 @@ function getFull(){
   // Re-run gen() to collect swiperInits
   const html=gen();
   const initCode=swiperInits.map(({id,dotColor,count})=>{
-    const loopStr = count >= 4 ? 'true' : 'false';
-    const autoplayStr = count >= 4 ? '{delay:3000,disableOnInteraction:false}' : 'false';
+    const pcView2 = Math.min(count, 3);
+    const useLoop2 = count >= Math.max(pcView2 * 2 + 1, 4);
+    const useRewind2 = !useLoop2 && count > 1;
+    const loopStr = useLoop2 ? 'true' : 'false';
+    const rewindStr = useRewind2 ? 'true' : 'false';
+    const autoplayStr = count >= 2 ? '{delay:3000,disableOnInteraction:false}' : 'false';
     const safeId = id.replace(/'/g,"\\'");
     const safeColor = dotColor.replace(/'/g,"\\'");
     return `
-    new Swiper('#${safeId}',{slidesPerView:1,loop:${loopStr},speed:1000,spaceBetween:16,
+    new Swiper('#${safeId}',{slidesPerView:1,loop:${loopStr},rewind:${rewindStr},speed:1000,spaceBetween:16,
       autoplay:${autoplayStr},
-      breakpoints:{768:{slidesPerView:${count>=4?3:Math.min(count,3)},spaceBetween:40}},
+      breakpoints:{768:{slidesPerView:${Math.min(count,3)},spaceBetween:40}},
       navigation:{prevEl:'#${safeId}-prev',nextEl:'#${safeId}-next'},
       pagination:{el:'#${safeId}-pager',clickable:true,
         renderBullet:function(i,c){return '<span class="'+c+'" style="display:inline-block;width:12px;height:12px;border-radius:50%;background:#aaa;margin:0 5px;cursor:pointer"></span>';}
@@ -1290,6 +1328,45 @@ document.addEventListener('click',function(e){
 function openMo(){document.getElementById('mo-code').textContent=getFull().substring(0,600)+'...';document.getElementById('modal').classList.add('open');}
 function closeMo(){document.getElementById('modal').classList.remove('open');}
 function cpHTML(){navigator.clipboard.writeText(getFull()).then(()=>toast('✓ HTMLをコピーしました'));closeMo();}
+function _setPvFrame(frameId, html){
+  const frame = document.getElementById(frameId);
+  // srcdocでChromeのポップアップブロックを回避
+  frame.srcdoc = html;
+}
+function openPreviewPC(){
+  const ov = document.getElementById('pc-pv-ov');
+  ov.style.display = 'flex';
+  _setPvFrame('pc-pv-frame', getFull());
+  // iframeが狭いコンテナに収まるようscaleで縮小
+  const frame = document.getElementById('pc-pv-frame');
+  frame.onload = function(){
+    const scale = Math.min((window.innerWidth * 0.96) / 1100, 1);
+    frame.style.transform = 'scale('+scale+')';
+    frame.style.transformOrigin = 'top left';
+    frame.style.width = '1100px';
+    const wrap = frame.parentElement;
+    wrap.style.height = (frame.offsetHeight * scale) + 'px';
+  };
+  toast('🖥 PCプレビューを表示しました');
+}
+function closePvPC(){
+  document.getElementById('pc-pv-ov').style.display='none';
+  document.getElementById('pc-pv-frame').srcdoc='';
+}
+function openPreviewSP(){
+  const ov = document.getElementById('sp-pv-ov');
+  ov.style.display = 'flex';
+  _setPvFrame('sp-pv-frame', getFull());
+  toast('📱 スマホプレビューを表示しました');
+}
+function closePvSP(){
+  document.getElementById('sp-pv-ov').style.display='none';
+  document.getElementById('sp-pv-frame').srcdoc='';
+}
+function spScroll(px){
+  const f = document.getElementById('sp-pv-frame');
+  try{ f.contentWindow.scrollBy({top:px,behavior:'smooth'}); }catch(e){}
+}
 function dl(){
   const b=new Blob([getFull()],{type:'text/html'});
   const a=document.createElement('a');a.href=URL.createObjectURL(b);
