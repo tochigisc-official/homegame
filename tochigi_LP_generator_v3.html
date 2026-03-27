@@ -134,6 +134,8 @@ textarea{resize:vertical;min-height:60px;line-height:1.6}
       <div class="tab" onclick="sw('other')">🎉 その他イベント</div>
       <div class="tab" onclick="sw('gourmet')">🍽 グルメ</div>
       <div class="tab" onclick="sw('goods')">👕 グッズ</div>
+      <div class="tab" onclick="sw('venue')">🗺 会場・アクセス</div>
+      <div class="tab" onclick="sw('misc')">⚙ その他</div>
     </div>
 
     <!-- 基本情報 -->
@@ -166,7 +168,7 @@ textarea{resize:vertical;min-height:60px;line-height:1.6}
             <div class="ia" id="sp-ia"><input type="file" accept="image/*" onchange="hi(event,'sp')"><div class="ia-ic">🏷</div><div class="ia-lb">クリックしてアップロード</div></div>
             <div class="ia-prev" id="sp-prev"><img id="sp-img" src="" alt=""><button class="rm" onclick="ri('sp')">✕</button></div>
             <div class="or">または 画像URL</div>
-            <input type="text" id="spImgUrl" placeholder="画像URL" oninput="setUrl(this)">
+            <input type="text" id="spUrl" placeholder="画像URL" oninput="setUrl(this)">
           </div>
         </div>
       </div>
@@ -273,6 +275,50 @@ textarea{resize:vertical;min-height:60px;line-height:1.6}
         <div class="fs-t">オフィシャルグッズ</div>
         <div id="gd-list"></div>
         <button class="add-btn" onclick="addGd()">＋ グッズを追加</button>
+      </div>
+    </div>
+
+    <!-- 会場・アクセス -->
+    <div class="pane" id="p-venue">
+      <div class="fs">
+        <div class="fs-t">会場マップ画像</div>
+        <p style="font-size:10px;color:var(--muted);margin-bottom:8px;line-height:1.6">試合ごとに差し替え可能です。ImgBBにアップしたURLを入力してください。</p>
+        <div class="ia" id="mapImg-ia"><input type="file" accept="image/*" onchange="hi(event,'mapImg')"><div class="ia-ic">🗺</div><div class="ia-lb">会場マップ画像をアップロード</div></div>
+        <div class="ia-prev" id="mapImg-prev"><img id="mapImg-img" src="" alt=""><button class="rm" onclick="ri('mapImg')">✕</button></div>
+        <div class="or">または 画像URL</div>
+        <input type="text" id="mapImgUrl" value="https://www.tochigisc.jp/upload/NewsDetail/images/pc_img_15559_697c2443-f018-4835-89a2-4fd4857d3f39.jpg" placeholder="画像URL" oninput="setUrl(this)" style="font-size:10px">
+        <p class="fr-help">変更なければデフォルトURLのままでOK。試合ごとに差し替える場合はImgBBのDirect linkを貼り付けてください</p>
+      </div>
+      <div class="fs">
+        <div class="fs-t">アクセスガイド図（駐車場など）</div>
+        <p style="font-size:10px;color:var(--muted);margin-bottom:8px;line-height:1.6">駐車場の場所などが試合によって変わる場合はここで差し替えてください。空欄なら非表示になります。</p>
+        <div class="ia" id="accessImg-ia"><input type="file" accept="image/*" onchange="hi(event,'accessImg')"><div class="ia-ic">🅿</div><div class="ia-lb">アクセスガイド図をアップロード</div></div>
+        <div class="ia-prev" id="accessImg-prev"><img id="accessImg-img" src="" alt=""><button class="rm" onclick="ri('accessImg')">✕</button></div>
+        <div class="or">または 画像URL</div>
+        <input type="text" id="accessImgUrl" placeholder="画像URL（空欄なら非表示）" oninput="setUrl(this)" style="font-size:10px">
+      </div>
+      <div class="fs">
+        <div class="fs-t">シャトルバス 駅→スタジアム 発車時刻</div>
+        <div class="fr"><label>乗り場テキスト</label><input type="text" id="shuttleFromStop" value="雀宮駅東口乗り場発車時刻" oninput="up()"><p class="fr-help">例：雀宮駅東口乗り場発車時刻</p></div>
+        <div class="fr"><label>発車時刻（改行で複数行）</label><textarea id="shuttleFromTimes" oninput="up()" style="min-height:80px">11:00 / 11:30
+12:00 / 12:30
+13:00 / 13:30 / 14:00</textarea></div>
+      </div>
+      <div class="fs">
+        <div class="fs-t">シャトルバス スタジアム→駅 発車時刻</div>
+        <div class="fr"><label>乗り場テキスト</label><input type="text" id="shuttleToStop" value="栃木県総合運動公園 南第２駐車場バス乗り場" oninput="up()"><p class="fr-help">例：栃木県総合運動公園 南第２駐車場バス乗り場</p></div>
+        <div class="fr"><label>発車時刻（改行で複数行）</label><textarea id="shuttleToTimes" oninput="up()" style="min-height:100px">16:00 / 16:20 / 16:40
+17:00 / 17:15 / 17:30 / 17:45
+18:00 / 18:15 / 18:30（最終）</textarea></div>
+      </div>
+    </div>
+
+    <!-- その他 -->
+    <div class="pane" id="p-misc">
+      <div class="fs">
+        <div class="fs-t">公式YouTube 動画URL</div>
+        <p style="font-size:10px;color:var(--muted);margin-bottom:8px;line-height:1.6">試合ごとのハイライト動画などのURLを貼り付けてください。</p>
+        <div class="fr"><label>YouTube 動画URL</label><input type="text" id="ytUrl" value="https://www.youtube.com/watch?v=DTLf1XQxtVw" placeholder="https://www.youtube.com/watch?v=XXXXXXXXXX" oninput="up()"><p class="fr-help">watch?v= または youtu.be/ 形式に対応。GitHubに公開後に動画が表示されます（ローカルでは表示されません）</p></div>
       </div>
     </div>
   </div>
@@ -745,6 +791,26 @@ function gen(){
   const mo=g('mo'),da=g('da'),dw=g('dw'),node=g('matchNode'),ko=g('ko');
   const opp=g('opp'),oppEn=g('oppEn'),oppLabel=g('oppLabel'),tktUrl=g('tktUrl');
   const h1Src=iS('h1'),h2Src=iS('h2'),scSrc=iS('sc');
+  const mapImgSrc=iS('mapImg'),accessImgSrc=iS('accessImg');
+  const mapImgUrl=g('mapImgUrl'),accessImgUrl=g('accessImgUrl');
+  const mapImg = mapImgSrc || mapImgUrl || 'https://www.tochigisc.jp/upload/NewsDetail/images/pc_img_15559_697c2443-f018-4835-89a2-4fd4857d3f39.jpg';
+  const accessImg = accessImgSrc || accessImgUrl || '';
+  const shuttleFromStop=g('shuttleFromStop')||'雀宮駅東口乗り場発車時刻';
+  const shuttleFromTimes=(g('shuttleFromTimes')||'11:00 / 11:30\n12:00 / 12:30\n13:00 / 13:30 / 14:00').split('\n').join('<br>');
+  const shuttleToStop=g('shuttleToStop')||'栃木県総合運動公園 南第２駐車場バス乗り場';
+  const shuttleToTimes=(g('shuttleToTimes')||'16:00 / 16:20 / 16:40\n17:00 / 17:15 / 17:30 / 17:45\n18:00 / 18:15 / 18:30（最終）').split('\n').join('<br>');
+  // YouTube URL → embed URL変換
+  function toYtEmbed(url){
+    if(!url) return 'https://www.youtube.com/embed/DTLf1XQxtVw';
+    const m1=url.match(/[?&]v=([^&]+)/);
+    if(m1) return 'https://www.youtube.com/embed/'+m1[1];
+    const m2=url.match(/youtu\.be\/([^?]+)/);
+    if(m2) return 'https://www.youtube.com/embed/'+m2[1];
+    const m3=url.match(/embed\/([^?]+)/);
+    if(m3) return url;
+    return 'https://www.youtube.com/embed/DTLf1XQxtVw';
+  }
+  const ytEmbedUrl=toYtEmbed(g('ytUrl'));
   const visLogo=IS['vis']||g('visUrl')||'';
   const homeLogo=IS['home']||g('homeUrl')||'';
   const spOn=feats['sp'],h1On=feats['h1'];
@@ -806,13 +872,12 @@ ${h1On
 }
 
 <!-- ②節・対戦情報 -->
-<article id="day" style="background:#005BAC url('${BG.dayBg}') no-repeat left/auto 100%;color:#fff;font-weight:800;position:relative;overflow:hidden">
-  <div style="position:absolute;top:0;right:0;background:url('${BG.bgRight}') right top/contain no-repeat;width:35vw;height:100%;pointer-events:none;opacity:.6"></div>
-  ${h2Src
-    ? `<div style="position:relative;z-index:2"><img src="${h2Src}" style="width:100%;display:block;aspect-ratio:8000/4500;object-fit:cover"></div>`
-    : `<section style="width:90%;max-width:1100px;margin:0 auto;padding:40px 20px;position:relative;z-index:2">
-      <p style="font-size:clamp(13px,1vw,18px);text-align:center;letter-spacing:.2em;margin-bottom:10px">MEIJI YASUDA J.LEAGUE 100 YEAR VISION LEAGUE</p>
-      <p style="text-align:center;font-size:clamp(20px,2.8vw,36px);letter-spacing:.15em;margin-bottom:20px">
+<article id="day" style="${h2Src?`background:url('${h2Src}') center/cover no-repeat;`:`background:#005BAC url('${BG.dayBg}') no-repeat left/auto 100%;`}color:#fff;font-weight:800;position:relative;overflow:hidden">
+  ${h2Src?`<div style="position:absolute;inset:0;background:rgba(0,35,90,0.55);z-index:0;pointer-events:none"></div>`:``}
+  ${h2Src?``:`<div style="position:absolute;top:0;right:0;background:url('${BG.bgRight}') right top/contain no-repeat;width:35vw;height:100%;pointer-events:none;opacity:.6"></div>`}
+  <section style="${h2Src?`width:100%;max-width:100%;`:`width:90%;max-width:1100px;margin:0 auto;`}padding:40px 20px;position:relative;z-index:2">
+      <p style="font-size:clamp(13px,1vw,18px);text-align:center;letter-spacing:.2em;margin-bottom:10px;position:relative;z-index:1">MEIJI YASUDA J.LEAGUE 100 YEAR VISION LEAGUE</p>
+      <p style="text-align:center;font-size:clamp(20px,2.8vw,36px);letter-spacing:.15em;margin-bottom:20px;position:relative;z-index:1">
         <img src="${BG.wingL}" style="width:2.6vw;max-width:36px;vertical-align:middle;margin-right:8px" alt="">
         ${node}
         <img src="${BG.wingR}" style="width:2.6vw;max-width:36px;vertical-align:middle;margin-left:8px" alt="">
@@ -836,7 +901,7 @@ ${h1On
           <div style="font-size:clamp(12px,2.5vw,16px);font-weight:900;margin-top:4px;font-style:italic;letter-spacing:1px">VISITOR</div>
         </div>
       </div>
-    </section>`}
+    </section>
 </article>
 
 <!-- スペシャルマッチ帯 -->
@@ -950,7 +1015,7 @@ ${spOn?`<div style="background:#fff;border-top:2px solid #e0e0e0;border-bottom:2
   </div>
   <div style="width:90%;max-width:1000px;margin:0 auto;position:relative;z-index:1">
     <div style="background:#fff;border:1px solid #0A1F3A;box-shadow:.5rem .5rem 0 #DFD000;padding:32px;margin-bottom:24px">
-      <img src="https://www.tochigisc.jp/upload/NewsDetail/images/pc_img_15559_697c2443-f018-4835-89a2-4fd4857d3f39.jpg" alt="会場マップ" style="width:100%;display:block;margin-bottom:20px">
+      <img src="${mapImg}" alt="会場マップ" style="width:100%;display:block;margin-bottom:20px">
       <div style="width:100%;aspect-ratio:16/9;margin-bottom:24px">
         <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d6413.592182238946!2d139.859326!3d36.510784!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x601f5d4a180a368b%3A0x96f64a52213d057!2z5pel5pys44CSMzIxLTAxNTIg5qCD5pyo55yM5a6H6YO95a6u5biC6KW_5bed55Sw77yU5LiB55uu77yR4oiS77yR!5e0!3m2!1sja!2sus!4v1771195476445!5m2!1sja!2sus" width="100%" height="100%" style="border:0;display:block" allowfullscreen loading="lazy"></iframe>
       </div>
@@ -961,7 +1026,7 @@ ${spOn?`<div style="background:#fff;border-top:2px solid #e0e0e0;border-bottom:2
           <div style="text-align:center"><a href="https://www.tochigisc.jp/news/1455" target="_blank" style="display:inline-block;background:#FFF100;color:#0A1F3A;border:1px solid #0A1F3A;font-size:12px;font-weight:700;padding:10px 20px;text-decoration:none;font-family:sans-serif">「会場運営」の詳細はこちら ▶</a></div>
         </div>
         <div style="border:1px solid #ddd;padding:20px">
-          <div style="background:#005BAC;color:#fff;font-size:13px;font-weight:900;padding:8px 12px;text-align:center;letter-spacing:1px;margin-bottom:12px;font-family:sans-serif">栃木シティサポーターの皆様へ</div>
+          <div style="background:#005BAC;color:#fff;font-size:13px;font-weight:900;padding:8px 12px;text-align:center;letter-spacing:1px;margin-bottom:12px;font-family:sans-serif">ビジターサポーターの皆様へ</div>
           <p style="font-size:12px;color:#333;line-height:1.8;margin-bottom:14px;font-family:sans-serif">応援ルール等の詳細に関しましては、下記にてご確認ください。皆さまのご来場をお待ちしております！</p>
           <div style="text-align:center"><a href="https://www.tochigisc.org/2026VISITOR" target="_blank" style="display:inline-block;background:#FFF100;color:#0A1F3A;border:1px solid #0A1F3A;font-size:12px;font-weight:700;padding:10px 20px;text-decoration:none;font-family:sans-serif">ビジターチーム応援ルール ▶</a></div>
         </div>
@@ -986,17 +1051,17 @@ ${spOn?`<div style="background:#fff;border-top:2px solid #e0e0e0;border-bottom:2
       <div style="text-align:center;margin-bottom:24px">
         <a href="https://www.tochigisc.jp/stadium/kanseki-stadium.html" target="_blank" style="display:inline-block;background:#FFF100;color:#0A1F3A;border:1px solid #0A1F3A;font-size:14px;font-weight:700;padding:12px 32px;text-decoration:none;letter-spacing:1px;font-family:sans-serif">アクセスガイド ▶</a>
       </div>
-      <img src="https://cdn.peraichi.com/userData/5e4de06f-1c70-4b98-a034-24e60a0000c5/img/b17ad6c0-f036-013e-e95f-0a58a9feac02/shuttle-bus.jpg" alt="JR雀宮駅発着シャトルバスの運行について" style="width:100%;display:block;margin-bottom:20px">
+      ${accessImg?`<img src="${accessImg}" alt="アクセスガイド" style="width:100%;display:block;margin-bottom:20px">`:`<img src="https://cdn.peraichi.com/userData/5e4de06f-1c70-4b98-a034-24e60a0000c5/img/b17ad6c0-f036-013e-e95f-0a58a9feac02/shuttle-bus.jpg" alt="JR雀宮駅発着シャトルバスの運行について" style="width:100%;display:block;margin-bottom:20px">`}
       <h4 style="font-size:15px;font-weight:900;margin-bottom:16px;font-family:sans-serif;color:#0A1F3A">JR雀宮駅発着シャトルバスの運行について</h4>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px" class="time-grid">
         <div style="background:#f8f8f8;padding:16px">
           <div style="background:#005BAC;color:#fff;font-size:12px;font-weight:700;padding:6px 12px;margin-bottom:12px;font-family:sans-serif">▼ JR雀宮駅発車時刻（スタジアム行き）</div>
-          <p style="font-size:13px;line-height:2;color:#333;font-family:sans-serif">雀宮駅東口乗り場発車時刻<br>11:00 / 11:30<br>12:00 / 12:30<br>13:00 / 13:30 / 14:00</p>
+          <p style="font-size:13px;line-height:2;color:#333;font-family:sans-serif">${shuttleFromStop}<br>${shuttleFromTimes}</p>
           <p style="font-size:11px;color:#777;margin-top:8px;font-family:sans-serif">※お客様のご乗車状況によって5分程度発車時刻から前後する場合がございます。</p>
         </div>
         <div style="background:#f8f8f8;padding:16px">
           <div style="background:#005BAC;color:#fff;font-size:12px;font-weight:700;padding:6px 12px;margin-bottom:12px;font-family:sans-serif">▼ スタジアム発車時刻（JR雀宮駅行き）</div>
-          <p style="font-size:13px;line-height:2;color:#333;font-family:sans-serif">栃木県総合運動公園 南第２駐車場バス乗り場<br>16:00 / 16:20 / 16:40<br>17:00 / 17:15 / 17:30 / 17:45<br>18:00 / 18:15 / 18:30（最終）</p>
+          <p style="font-size:13px;line-height:2;color:#333;font-family:sans-serif">${shuttleToStop}<br>${shuttleToTimes}</p>
           <p style="font-size:11px;color:#777;margin-top:8px;font-family:sans-serif">※お客様のご乗車状況によって5分程度発車時刻から前後する場合がございます。</p>
         </div>
       </div>
@@ -1007,13 +1072,13 @@ ${spOn?`<div style="background:#fff;border-top:2px solid #e0e0e0;border-bottom:2
       <div style="background:#f0f4f8;padding:16px">
         <h4 style="font-size:14px;font-weight:900;margin-bottom:10px;font-family:sans-serif;color:#0A1F3A">ご利用方法</h4>
         <ul style="font-size:12px;color:#333;line-height:1.9;text-align:left;font-family:sans-serif">
-          <li style="padding-left:1em">・雀宮駅東口シャトルバスのりばにて乗車券をお買い求めください。</li>
-          <li style="padding-left:1em">・CLUB.T会員証をお持ちの方はご提示の上乗車券をお買い求めください。</li>
-          <li style="padding-left:1em">・バス乗車証を乗り場スタッフへお渡しください。（バスカード・Suica・PASMOはご利用できません。）</li>
-          <li style="padding-left:1em">・シャトルバスは、試合観戦を目的としたお客様のみご利用可能です。</li>
-          <li style="padding-left:1em">・バスチケット購入時に観戦チケットをご提示の上ご購入下さい。</li>
-          <li style="padding-left:1em">・座席は譲り合ってご利用ください。</li>
-          <li style="padding-left:1em">・乗車券は当日限りの有効となります。</li>
+          <li style="padding-left:1em">雀宮駅東口シャトルバスのりばにて乗車券をお買い求めください。</li>
+          <li style="padding-left:1em">CLUB.T会員証をお持ちの方はご提示の上乗車券をお買い求めください。</li>
+          <li style="padding-left:1em">バス乗車証を乗り場スタッフへお渡しください。（バスカード・Suica・PASMOはご利用できません。）</li>
+          <li style="padding-left:1em">シャトルバスは、試合観戦を目的としたお客様のみご利用可能です。</li>
+          <li style="padding-left:1em">バスチケット購入時に観戦チケットをご提示の上ご購入下さい。</li>
+          <li style="padding-left:1em">座席は譲り合ってご利用ください。</li>
+          <li style="padding-left:1em">乗車券は当日限りの有効となります。</li>
         </ul>
       </div>
     </div>
@@ -1091,7 +1156,7 @@ ${spOn?`<div style="background:#fff;border-top:2px solid #e0e0e0;border-bottom:2
     <hr style="border:none;border-top:1px dashed rgba(255,255,255,.4);margin:0 0 8% 0">
     <div style="display:grid;grid-template-columns:54% 1fr;gap:3%;align-items:center;margin-bottom:8%" class="sns-grid">
       <div style="aspect-ratio:16/9">
-        <iframe src="https://www.youtube.com/embed/DTLf1XQxtVw?si=YZppBNJeOehCZRDh" width="100%" height="100%" style="border:0;display:block" allowfullscreen loading="lazy"></iframe>
+        <iframe src="${ytEmbedUrl}" width="100%" height="100%" style="border:0;display:block" allowfullscreen loading="lazy"></iframe>
       </div>
       <div style="text-align:left">
         <h3 style="font-size:clamp(16px,1.8vw,22px);font-weight:800;color:#FFF100;margin-bottom:12px;font-family:sans-serif">公式YouTubeチャンネル</h3>
@@ -1386,7 +1451,11 @@ function saveJSON(){
     spTxt:g('spTxt'), ctLead:g('ctLead'),
     homeUrl:g('homeUrl'), visUrl:g('visUrl'),
     h1Url:g('h1Url'), h2Url:g('h2Url'), scUrl:g('scUrl'),
-    spImgUrl:g('spImgUrl'),
+    mapImgUrl:g('mapImgUrl'), accessImgUrl:g('accessImgUrl'),
+    shuttleFromStop:g('shuttleFromStop'), shuttleFromTimes:g('shuttleFromTimes'),
+    shuttleToStop:g('shuttleToStop'), shuttleToTimes:g('shuttleToTimes'),
+    ytUrl:g('ytUrl'),
+    spUrl:g('spUrl'),
     // トグル状態
     feats:{...feats},
     // スライダーデータ（画像はURLのみ保存）
@@ -1413,7 +1482,7 @@ function loadJSON(event){
       const d=JSON.parse(e.target.result);
       if(!d.version) throw new Error('形式が違います');
       // 基本情報を復元
-      const fields=['mo','da','dw','matchNode','ko','opp','oppEn','oppLabel','tktUrl','spTxt','ctLead','homeUrl','visUrl','h1Url','h2Url','scUrl','spImgUrl'];
+      const fields=['mo','da','dw','matchNode','ko','opp','oppEn','oppLabel','tktUrl','spTxt','ctLead','homeUrl','visUrl','h1Url','h2Url','scUrl','spUrl','mapImgUrl','accessImgUrl','shuttleFromStop','shuttleFromTimes','shuttleToStop','shuttleToTimes','ytUrl'];
       fields.forEach(id=>{
         const el=document.getElementById(id);
         if(el && d[id]!==undefined) el.value=d[id];
