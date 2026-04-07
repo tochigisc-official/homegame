@@ -267,8 +267,13 @@ textarea{resize:vertical;min-height:60px;line-height:1.6}
         <div id="gm-list"></div>
         <button class="add-btn" onclick="addGm()">＋ グルメを追加</button>
       </div>
+      <div class="fs">
+        <div class="fr">
+          <label>グルメ詳細URL</label>
+          <input type="text" id="gourmetUrl" placeholder="https://..." oninput="up()">
+        </div>
+      </div>
     </div>
-
     <!-- グッズ -->
     <div class="pane" id="p-goods">
       <div class="fs">
@@ -276,8 +281,13 @@ textarea{resize:vertical;min-height:60px;line-height:1.6}
         <div id="gd-list"></div>
         <button class="add-btn" onclick="addGd()">＋ グッズを追加</button>
       </div>
+      <div class="fs">
+        <div class="fr">
+          <label>グッズ詳細URL</label>
+          <input type="text" id="goodsUrl" placeholder="https://..." oninput="up()">
+        </div>
+      </div>
     </div>
-
     <!-- 会場・アクセス -->
     <div class="pane" id="p-venue">
       <div class="fs">
@@ -789,7 +799,7 @@ document.addEventListener('click', function(e){
 function gen(){
   swNum=0; swiperInits=[];  // reset on each render
   const mo=g('mo'),da=g('da'),dw=g('dw'),node=g('matchNode'),ko=g('ko');
-  const opp=g('opp'),oppEn=g('oppEn'),oppLabel=g('oppLabel'),tktUrl=g('tktUrl');
+  const opp=g('opp'),oppEn=g('oppEn'),oppLabel=g('oppLabel'),tktUrl=g('tktUrl'),goodsUrl=g('goodsUrl'),gourmetUrl=g('gourmetUrl');
   const h1Src=iS('h1'),h2Src=iS('h2'),scSrc=iS('sc');
   const mapImgSrc=iS('mapImg'),accessImgSrc=iS('accessImg');
   const mapImgUrl=g('mapImgUrl'),accessImgUrl=g('accessImgUrl');
@@ -991,6 +1001,10 @@ ${spOn?`<div style="background:#fff;border-top:2px solid #e0e0e0;border-bottom:2
     </div>
     ${buildSwiper(gms, cardGourmet, '', TTL.gourmet, TTL.gPrev, TTL.gNext, '#005BAC')}
   </div>
+  ${gourmetUrl?`
+  <div style="text-align:center;padding:16px 0 8px;position:relative;z-index:1">
+    <a href="${gourmetUrl}" target="_blank" style="display:inline-block;background:#005BAC;color:#fff;font-size:14px;font-weight:900;padding:14px 36px;text-decoration:none;letter-spacing:2px;font-family:sans-serif">グルメ情報の詳細はこちら ▶</a>
+  </div>`:''}
 </article>
 
 <!-- ⑨グッズ -->
@@ -1000,11 +1014,11 @@ ${spOn?`<div style="background:#fff;border-top:2px solid #e0e0e0;border-bottom:2
   <div style="position:relative;z-index:1">
     ${buildSwiper(gds, cardGoods, '', TTL.goods, TTL.gdPrev, TTL.gdNext, '#FFF100')}
   </div>
+  ${goodsUrl?`
   <div style="text-align:center;padding:16px 0 8px;position:relative;z-index:1">
-    <a href="https://www.rakuten.ne.jp/gold/monmiya/tochigi-sc/" target="_blank" style="display:inline-block;background:#FFF100;color:#0A1F3A;font-size:14px;font-weight:900;padding:14px 36px;text-decoration:none;letter-spacing:2px;font-family:sans-serif">グッズ情報の詳細はこちら ▶</a>
-  </div>
+    <a href="${goodsUrl}" target="_blank" style="display:inline-block;background:#FFF100;color:#0A1F3A;font-size:14px;font-weight:900;padding:14px 36px;text-decoration:none;letter-spacing:2px;font-family:sans-serif">グッズ情報の詳細はこちら ▶</a>
+  </div>`:''}
 </article>
-
 
 <!-- ⑩会場マップ -->
 <article id="map" style="background:#FFF100;position:relative;overflow:hidden;padding:0;padding-bottom:60px">
