@@ -512,11 +512,11 @@ function rPu(){
       <div class="fr"><label>説明文（任意）</label><textarea oninput="pus[${i}].desc=this.value;up()">${p.desc}</textarea></div>
       <div class="fr2">
         <div class="fr"><label>見出し1</label><input type="text" value="${p.lb1}" oninput="pus[${i}].lb1=this.value;up()"></div>
-        <div class="fr"><label>内容1</label><input type="text" value="${p.v1}" oninput="pus[${i}].v1=this.value;up()"></div>
+        <div class="fr"><label>内容1</label><textarea oninput="pus[${i}].v1=this.value;up()">${p.v1}</textarea></div>
       </div>
       <div class="fr2">
         <div class="fr"><label>見出し2</label><input type="text" value="${p.lb2}" oninput="pus[${i}].lb2=this.value;up()"></div>
-        <div class="fr"><label>内容2</label><input type="text" value="${p.v2}" oninput="pus[${i}].v2=this.value;up()"></div>
+        <div class="fr"><label>内容2</label><textarea oninput="pus[${i}].v2=this.value;up()">${p.v2}</textarea></div>
       </div>
     </div>`).join('');
 }
@@ -833,9 +833,9 @@ function gen(){
         <h3 style="font-size:clamp(16px,1.8vw,22px);font-weight:800;color:#fff;line-height:1.5;font-family:sans-serif;margin-bottom:0">${p.title}</h3>
         ${p.desc?`<p style="font-weight:500;margin-top:1em;color:#fff;font-size:clamp(12px,1.2vw,15px);line-height:1.75;font-family:sans-serif">${p.desc}</p>`:''}
         ${p.lb1?`<h4 style="background:#FFF100;color:#0A1F3A;font-size:clamp(11px,1.1vw,14px);font-weight:500;line-height:2;text-align:center;width:5em;margin-top:2em;display:inline-block;font-family:sans-serif">${p.lb1}</h4>
-        <p style="font-weight:700;margin-top:.5em;color:#fff;font-size:clamp(12px,1.2vw,15px);font-family:sans-serif">${p.v1}</p>`:''}
+        <p style="font-weight:700;margin-top:.5em;color:#fff;font-size:clamp(12px,1.2vw,15px);font-family:sans-serif">${nl2br(p.v1)}</p>`:''}
         ${p.lb2?`<h4 style="background:#FFF100;color:#0A1F3A;font-size:clamp(11px,1.1vw,14px);font-weight:500;line-height:2;text-align:center;width:5em;margin-top:1.5em;display:inline-block;font-family:sans-serif">${p.lb2}</h4>
-        <p style="font-weight:700;margin-top:.5em;color:#fff;font-size:clamp(12px,1.2vw,15px);font-family:sans-serif">${p.v2}</p>`:''}
+        <p style="font-weight:700;margin-top:.5em;color:#fff;font-size:clamp(12px,1.2vw,15px);font-family:sans-serif">${nl2br(p.v2)}</p>`:''}  
       </figcaption>
     </figure>`;
   }).join('');
@@ -1196,7 +1196,10 @@ ${spOn?`<div style="background:#fff;border-top:2px solid #e0e0e0;border-bottom:2
 
 </div>`;
 }
-
+// ===== UTIL =====
+function nl2br(str){
+  return (str || '').replace(/\n/g, '<br>');
+}
 // ===== UPDATE =====
 function up(){
   document.getElementById('pvf').innerHTML=gen();
