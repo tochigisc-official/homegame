@@ -896,13 +896,23 @@ function gen(){
   ${hasNav?`<div style="text-align:center;padding-bottom:20px"><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#fff;margin:0 4px"></span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#888;margin:0 4px"></span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#888;margin:0 4px"></span></div>`:''}`;
 
   return`<div style="font-family:'Noto Sans JP',sans-serif;color:#0A1F3A;line-height:1.6">
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-85CGN9JPG3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-85CGN9JPG3');
+</script>
+
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&family=Barlow+Condensed:ital,wght@1,700;1,900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://use.typekit.net/ppi3gqa.css">
 <style>
 .swiper-pagination-bullet{background:#aaa;opacity:1;width:12px;height:12px}
 .swiper-pagination-bullet-active{background:#0A1F3A}
 </style>
-
+  
 <!-- ①メインビジュアル -->
 ${h1On
   ? h1Src
@@ -1315,13 +1325,23 @@ function getFull(){
       }
     });`;
   }).join('');
-  return`<!DOCTYPE html>
+ return`<!DOCTYPE html>
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="format-detection" content="telephone=no">
 <title>【栃木SCホームゲーム】${g('mo')}/${g('da')}(${g('dw').toUpperCase()}) ${g('opp')}戦 開催情報</title>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-85CGN9JPG3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-85CGN9JPG3');
+</script>
+
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&family=Barlow+Condensed:ital,wght@1,700;1,900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://use.typekit.net/ppi3gqa.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
