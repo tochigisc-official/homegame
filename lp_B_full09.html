@@ -83,7 +83,9 @@
   .hero .sponsors{display:flex;flex-direction:column;align-items:flex-start;gap:8px;margin-top:14px}
   .hero .sp-chip{display:inline-flex;align-items:center;gap:8px;background:var(--navy);color:#fff;padding:6px 12px;font-weight:800;font-size:13px}
   .hero .sp-chip .lg{background:var(--yellow);color:var(--navy);padding:2px 7px;font-size:11px;font-family:var(--latin)}
-  .hero .sp-chip .sp-txt{line-height:1.25}
+  .hero .sp-chip .sp-txt{line-height:1.3}
+  .hero .sp-chip .sp-txt .cn{font-size:14.5px;font-weight:900}
+  .hero .sp-chip .sp-txt .sm{font-size:10.5px;letter-spacing:.06em;opacity:.9}
   .hero .sp-chip.kanmuri{background:#fff;color:var(--navy);border:2px solid var(--navy)}
 
   /* MATCH CARD */
@@ -99,6 +101,8 @@
 
   /* QUICK NAV */
   .qnav{background:var(--navy);position:sticky;top:0;z-index:40;border-bottom:3px solid var(--yellow)}
+  section[id],div[id="ticket"]{scroll-margin-top:72px}
+  html{scroll-behavior:smooth}
   .qnav ul{list-style:none;display:flex}
   .qnav li{flex:1}
   .qnav a{display:flex;flex-direction:column;align-items:center;gap:5px;padding:11px 2px;text-decoration:none;color:#fff;font-size:11px;font-weight:700;border-bottom:3px solid transparent;margin-bottom:-3px}
@@ -118,7 +122,7 @@
   .zone-divider span{display:flex;align-items:center;justify-content:center;gap:14px;max-width:100%;color:var(--navy);font-size:clamp(17px,5.2vw,20px);font-weight:900;letter-spacing:.03em;white-space:nowrap}
   .zone-divider span::before,.zone-divider span::after{content:"";flex:0 1 34px;min-width:12px;height:1px;background:var(--navy);opacity:.32}
   .band-sec.zone{background:var(--zoneBg)}
-  .fc-cta{margin:26px 0 0;background:transparent;border:none;border-top:1.5px solid var(--navy);border-radius:0;padding:24px 20px;display:flex;flex-direction:column;gap:14px;align-items:center;text-align:center}
+  .fc-cta{margin:26px 0 0;background:transparent;border:none;border-radius:0;padding:24px 20px;display:flex;flex-direction:column;gap:14px;align-items:center;text-align:center}
   .fc-txt{display:flex;flex-direction:column;gap:3px;align-items:center;text-align:center}
   .fc-txt b{font-size:16px;font-weight:900;color:var(--navy)}
   .fc-txt span{font-size:12.5px;color:#555}
@@ -355,7 +359,7 @@
       <div class="ko">14:00 KICK OFF</div>
       <div class="venue">カンセキスタジアム</div>
       <div class="sponsors">
-        <span class="sp-chip"><span class="lg">TKC</span><span class="sp-txt">株式会社TKC<br>SPECIAL MATCH</span></span>
+        <span class="sp-chip"><span class="lg">TKC</span><span class="sp-txt"><span class="cn">株式会社TKC</span><br><span class="sm">SPECIAL MATCH</span></span></span>
         <span class="sp-chip kanmuri">宇都宮市民デー</span>
       </div>
     </div>
@@ -372,6 +376,7 @@
 
   <!-- QUICK NAV -->
   <nav class="qnav"><ul>
+    <li><a href="#top"><svg viewBox="0 0 24 24"><path d="M12 19V5"/><path d="M5 12l7-7 7 7"/></svg>トップ</a></li>
     <li><a href="#event"><svg viewBox="0 0 24 24"><path d="M4 8h16v11a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1z"/><path d="M4 8l2-4h12l2 4"/><path d="M9 12h6"/></svg>イベント</a></li>
     <li><a href="#gourmet"><svg viewBox="0 0 24 24"><path d="M6 3v7a2 2 0 0 0 4 0V3M8 10v11"/><path d="M16 3c-1.5 0-2.5 2-2.5 4.5S14.5 12 16 12v9"/></svg>グルメ</a></li>
     <li><a href="#seat"><svg viewBox="0 0 24 24"><path d="M6 4h9a3 3 0 0 1 3 3v6H6z"/><path d="M6 13v5h13"/><path d="M18 13v5"/></svg>座席</a></li>
@@ -471,7 +476,7 @@
 
 
     <div class="sk-seat-map">
-      <svg id="stadium" viewBox="0 0 400 344" xmlns="http://www.w3.org/2000/svg"></svg>
+      <svg id="stadium" viewBox="0 24 400 296" xmlns="http://www.w3.org/2000/svg"></svg>
     </div>
 
     <div class="sk-seat-view" id="view"></div>
@@ -495,7 +500,7 @@
     <div class="access-panel" data-panel="shuttle" hidden>
       <ul class="apts"><li><b>往路</b>：JR雀宮駅 東口のりば → スタジアム（約10分）</li><li><b>復路</b>：総合運動公園 南第2駐車場のりば → 雀宮駅</li><li><b>運賃</b>：往復500円／片道300円（高校生以下無料・学生証提示）</li></ul>
       <div class="shuttle-time"><div class="stl">発車時刻 <span class="var">※乗車状況により5分程度前後します</span></div><div class="strow"><span>往路</span><b>11:00 / 11:30 / 12:00 / 12:30 / 13:00 / 13:30 / 14:00（最終）</b></div><div class="strow"><span>復路</span><b>16:00 / 16:15 / 16:30 / 16:45 / 17:00 / 17:15 / 17:30（最終）</b></div></div>
-      <ul class="apts"><li>乗車券は雀宮駅東口のりばで購入（観戦チケットをご提示ください）</li><li>Suica・PASMO・バスカードは利用できません</li><li>乗車券は当日限り有効／観戦目的の方のみご利用いただけます</li></ul>
+      <ul class="apts"><li>乗車券は雀宮駅東口のりばで購入（観戦チケットをご提示ください）</li><li>Suica・PASMO・バスカードは利用できません（お支払いは現金のみです）</li><li>乗車券は当日限り有効／観戦目的の方のみご利用いただけます</li></ul>
       <div class="alinks"><a href="#">雀宮駅までの電車を調べる ›</a></div>
     </div>
     <div class="access-panel" data-panel="train" hidden>
@@ -714,8 +719,10 @@ function seg(a0,a1,fill,ring,seatId,disabled){
 
 // ピッチレベル：トラック（青オーバル）＋ピッチ（白罫線の内側=緑の長方形）
 svg.appendChild(el('ellipse',{cx:CX,cy:CY,rx:74,ry:47,fill:'#2E7CC4',opacity:.92}));
-svg.appendChild(el('rect',{x:CX-54,y:CY-31,width:108,height:62,rx:5,fill:'#43A047'}));
-svg.appendChild(el('rect',{x:CX-54,y:CY-31,width:108,height:62,rx:5,fill:'none',stroke:'#fff',opacity:.9,'stroke-width':1.2}));
+svg.appendChild(el('rect',{x:CX-54,y:CY-31,width:108,height:62,fill:'#43A047'}));
+svg.appendChild(el('rect',{x:CX-54,y:CY-31,width:108,height:62,fill:'none',stroke:'#fff',opacity:.9,'stroke-width':1.2}));
+svg.appendChild(el('rect',{x:CX-54,y:CY-18,width:17,height:36,fill:'none',stroke:'#fff',opacity:.9,'stroke-width':1.2}));
+svg.appendChild(el('rect',{x:CX+54-17,y:CY-18,width:17,height:36,fill:'none',stroke:'#fff',opacity:.9,'stroke-width':1.2}));
 svg.appendChild(el('line',{x1:CX,y1:CY-31,x2:CX,y2:CY+31,stroke:'#fff',opacity:.9,'stroke-width':1.2}));
 svg.appendChild(el('circle',{cx:CX,cy:CY,r:10,fill:'none',stroke:'#fff',opacity:.9,'stroke-width':1.2}));
 
@@ -754,7 +761,7 @@ const [bx,by]=midPoint(178,210,'lower');
 const bl=el('text',{x:bx,y:by+2.5,class:'sk-zonelabel'}); bl.textContent='緩衝帯'; svg.appendChild(bl);
 
 // 方角ラベル（バック＝上のみ。メイン下はゲートAで示す／ホーム・ビジターのテキストは削除）
-{const t=el('text',{x:CX,y:CY-149,class:'sk-maplabel'}); t.textContent='バック'; svg.appendChild(t);}
+{const t=el('text',{x:CX,y:CY-36,class:'sk-dirlabel'}); t.textContent='バック'; svg.appendChild(t);}
 {const t=el('text',{x:CX,y:CY+42,class:'sk-dirlabel'}); t.textContent='メイン'; svg.appendChild(t);}
 
 // 入場ゲート（A=メイン下 / C=ホーム右 / G=ビジター左）※「ゲート」表記も付与
