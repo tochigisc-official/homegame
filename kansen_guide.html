@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>栃木SC 観戦ガイド ｜ STADIUM GUIDE</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --yellow:#FFEA00;
+    --navy:#042242;
+    --blue:#004D9F;
+    --paper:#FFFFFF;
+    --ink:#042242;
+    --ink-soft:#3A4A63;
+    --line:#E3E8EF;
+    --wrap:680px;
+    --sticky-h:120px; /* JSが実測で上書き */
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%; scroll-behavior:smooth}
+  @media (prefers-reduced-motion:reduce){ html{scroll-behavior:auto} }
+  body{
+    margin:0;
+    font-family:'Noto Sans JP','Hiragino Kaku Gothic ProN','Yu Gothic',sans-serif;
+    color:var(--ink);
+    background:var(--paper);
+    line-height:1.85;
+    font-size:16px;
+    letter-spacing:.01em;
+  }
+  .wrap{max-width:var(--wrap); margin:0 auto; padding:0 18px}
+  b,strong{font-weight:700}
+  a{color:var(--navy)}
+
+  /* ============ 追従ヘッダー（黄ナビ＋会場帯） ============ */
+  .sticky-top{position:sticky; top:0; z-index:20}
+
+  .navbar{background:var(--yellow)}
+  .navbar .inner{
+    max-width:var(--wrap); margin:0 auto;
+    display:flex; align-items:center; gap:10px; padding:9px 18px;
+  }
+  .nav-scroller{position:relative; flex:1; min-width:0}
+  .navbar nav{
+    display:flex; flex-wrap:nowrap; gap:5px;
+    overflow-x:auto; -webkit-overflow-scrolling:touch;
+    scrollbar-width:none; scroll-snap-type:x proximity;
+    padding:1px;
+  }
+  .navbar nav::-webkit-scrollbar{display:none}
+  .nav-scroller::after{
+    content:""; position:absolute; top:0; right:0; width:34px; height:100%;
+    background:linear-gradient(to right, rgba(255,234,0,0), var(--yellow) 78%);
+    pointer-events:none; transition:opacity .15s;
+  }
+  .nav-scroller.at-end::after{opacity:0}
+  .navbar nav a{
+    flex:none; color:var(--navy); text-decoration:none;
+    font-size:12px; font-weight:700; letter-spacing:.02em; line-height:1;
+    padding:7px 10px; border-radius:999px; border:1px solid rgba(4,34,66,.35);
+    background:transparent; white-space:nowrap; scroll-snap-align:start;
+  }
+  .navbar nav a.is-active{background:var(--navy); color:var(--yellow); border-color:var(--navy)}
+  .navbar nav a:focus-visible{outline:2px solid var(--navy); outline-offset:2px}
+  .navbar .lp-btn{
+    flex:none; display:inline-flex; align-items:center; gap:3px;
+    font-size:12.5px; font-weight:700; color:var(--navy);
+    border-left:1px solid rgba(4,34,66,.35); padding:3px 0 3px 12px;
+    text-decoration:none; white-space:nowrap;
+  }
+  .navbar .lp-btn svg{width:12px; height:12px; stroke:var(--navy); fill:none; stroke-width:2.5; stroke-linecap:round; stroke-linejoin:round}
+  .navbar .lp-btn:focus-visible{outline:2px solid var(--navy); outline-offset:2px}
+
+  /* 会場帯（常時表示・ここで切替が完結） */
+  .venue-strip{background:var(--navy); color:#fff}
+  .venue-strip .inner{
+    max-width:var(--wrap); margin:0 auto; padding:5px 18px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .venue-strip .vl{font-size:10.5px; font-weight:700; letter-spacing:.1em; color:#8FA3BC; flex:none}
+  .vtoggle{flex:none; display:flex; gap:3px; background:rgba(255,255,255,.10); border-radius:999px; padding:2px}
+  .vtoggle button{
+    appearance:none; border:0; cursor:pointer; font:inherit;
+    font-size:11.5px; font-weight:700; letter-spacing:.02em; line-height:1;
+    color:#fff; background:transparent; border-radius:999px; padding:6px 12px;
+  }
+  .vtoggle button[aria-pressed="true"]{background:var(--yellow); color:var(--navy)}
+  .vtoggle button:focus-visible{outline:2px solid var(--yellow); outline-offset:1px}
+  .venue-strip .vfull{
+    margin-left:auto; min-width:0; font-size:11px; color:#B9C6D8;
+    overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+  }
+
+  /* ============ ヘッダー ============ */
+  .head{padding:28px 0 4px}
+  .head .en{
+    font-family:'Anton',sans-serif; font-weight:400;
+    font-size:clamp(40px,13vw,66px); line-height:.94; letter-spacing:.01em;
+    color:var(--navy); margin:0;
+  }
+  .head .en .yl{background:linear-gradient(transparent 68%, var(--yellow) 68%)}
+  .head .ja{font-size:16px; font-weight:700; margin:8px 0 0; letter-spacing:.06em}
+  .head .sub{font-size:13.5px; color:var(--ink-soft); margin:14px 0 0; line-height:1.7}
+
+  /* ============ セクション（白地・罫線区切り） ============ */
+  main{padding:8px 0 40px}
+  .sec{
+    padding:30px 0 26px; border-top:1px solid var(--line); margin-top:6px;
+    scroll-margin-top:calc(var(--sticky-h) + 8px);
+  }
+  .sec:first-of-type{border-top:0; margin-top:14px}
+  .kick{display:flex; align-items:center; gap:10px; margin-bottom:2px}
+  .kick .ico{
+    flex:none; width:30px; height:30px; border-radius:8px; background:var(--yellow);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .kick .ico svg{width:17px; height:17px; stroke:var(--navy); fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round}
+  .kick .en{font-family:'Anton',sans-serif; font-size:14px; letter-spacing:.08em; color:var(--ink-soft); text-transform:uppercase}
+  .kick .tag{
+    margin-left:auto; font-size:10.5px; font-weight:700; letter-spacing:.05em;
+    color:#fff; background:var(--navy); border-radius:999px; padding:3px 10px; white-space:nowrap;
+  }
+  .sec h2{font-size:21px; font-weight:900; margin:6px 0 2px; letter-spacing:.01em; line-height:1.4}
+  .sec .desc{font-size:14px; color:var(--ink-soft); margin:6px 0 16px}
+  .sec h3{font-size:15.5px; font-weight:700; margin:22px 0 8px; padding-left:10px; border-left:3px solid var(--yellow); line-height:1.5}
+
+  .rows{border-top:1px solid var(--line); margin-top:4px}
+  .row{display:grid; grid-template-columns:96px 1fr; gap:14px; padding:13px 0; border-bottom:1px solid var(--line)}
+  .row .rk{font-size:13px; font-weight:700; color:var(--navy); padding-top:1px}
+  .row .rv{font-size:15px}
+  .row .rv .note{display:block; font-size:12.5px; color:var(--ink-soft); margin-top:3px}
+  .row .rv b{color:var(--navy)}
+
+  ul.plain{margin:4px 0; padding-left:1.2em; font-size:14.5px}
+  ul.plain li{margin:6px 0}
+  ul.plain li .note{display:block; font-size:12.5px; color:var(--ink-soft)}
+
+  .band{
+    background:var(--navy); color:#fff; border-radius:10px; padding:13px 16px; margin:16px 0 0;
+    font-size:13px; line-height:1.7;
+  }
+  .band b{color:var(--yellow)}
+  .memo{background:#F1F3F7; border-radius:10px; padding:12px 15px; font-size:13px; color:var(--ink-soft); margin-top:14px}
+  .memo b{color:var(--navy)}
+
+  details{border-top:1px solid var(--line)}
+  details>summary{
+    list-style:none; cursor:pointer; padding:13px 0; font-size:15px; font-weight:700;
+    display:flex; align-items:center; gap:8px;
+  }
+  details>summary::-webkit-details-marker{display:none}
+  details>summary::after{content:"＋"; margin-left:auto; font-weight:400; color:var(--blue); font-size:18px}
+  details[open]>summary::after{content:"−"}
+  details .body{padding:0 0 15px; font-size:14px; color:var(--ink-soft)}
+  details .body ul{margin:2px 0; padding-left:1.15em}
+  details .body li{margin:5px 0}
+  details .body p{margin:0 0 10px}
+
+  .vpill{display:inline-block; font-size:11px; font-weight:700; letter-spacing:.04em; color:var(--navy); background:var(--yellow); border-radius:6px; padding:2px 9px; margin-bottom:8px}
+
+  /* 画像枠（実画像はここに差し込む） */
+  .ph{
+    border:1px dashed rgba(4,34,66,.35); border-radius:10px; background:#FBFCFE;
+    aspect-ratio:16/9; display:flex; align-items:center; justify-content:center;
+    color:var(--ink-soft); font-size:12.5px; margin-top:14px; text-align:center; padding:10px; line-height:1.6;
+  }
+
+  /* 決済ロゴグリッド（各社ロゴを個別に配置する枠） */
+  .logo-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin-top:10px}
+  .logo-grid .logo{
+    border:1px dashed rgba(4,34,66,.3); border-radius:8px; background:#FBFCFE;
+    aspect-ratio:3/2; display:flex; align-items:center; justify-content:center;
+    font-size:11px; color:var(--ink-soft);
+  }
+  @media(min-width:681px){ .logo-grid{grid-template-columns:repeat(6,1fr)} }
+
+  /* 撮影可否のミニ表 */
+  .oxs{display:grid; grid-template-columns:1fr auto auto; gap:0; border:1px solid var(--line); border-radius:10px; overflow:hidden; margin-top:8px; font-size:13.5px}
+  .oxs>div{padding:9px 12px; border-bottom:1px solid var(--line)}
+  .oxs>div:nth-child(-n+3){background:#F1F3F7; font-weight:700; font-size:12px}
+  .oxs>div:nth-last-child(-n+3){border-bottom:0}
+  .oxs .c{text-align:center; min-width:54px; font-weight:700}
+  .oxs .ok{color:var(--blue)}
+  .oxs .ng{color:#B4231F}
+
+  /* 会場ブロック切替 */
+  .venue-block{display:none}
+  .venue-block.is-on{display:block}
+  .vb-anim{animation:vfade .28s ease both}
+  @keyframes vfade{from{opacity:0; transform:translateY(4px)}to{opacity:1; transform:none}}
+  @media (prefers-reduced-motion:reduce){ .vb-anim{animation:none} }
+
+  footer{padding:8px 0 40px; font-size:12px; color:var(--ink-soft)}
+  footer .rule{border-top:1px solid var(--line); padding-top:14px}
+
+  @media(min-width:681px){
+    body{font-size:16.5px}
+    .head{padding:40px 0 4px}
+    .row{grid-template-columns:120px 1fr}
+    .navbar nav a{font-size:13px; padding:8px 12px}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ 追従：黄ナビ（スライダー）＋会場帯 ============ -->
+<div class="sticky-top" id="sticky-top">
+  <div class="navbar">
+    <div class="inner">
+      <div class="nav-scroller">
+        <nav aria-label="ページ内の項目">
+          <a href="#access">アクセス</a>
+          <a href="#cashless">キャッシュレス</a>
+          <a href="#gate">入場</a>
+          <a href="#rules">ルール</a>
+          <a href="#banner">横断幕</a>
+          <a href="#visitor">ビジター</a>
+        </nav>
+      </div>
+      <a class="lp-btn" id="lp-link" href="https://tochigisc-official.github.io/homegame/">試合ページ<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></a>
+    </div>
+  </div>
+  <div class="venue-strip">
+    <div class="inner">
+      <span class="vl">会場</span>
+      <div class="vtoggle" role="group" aria-label="会場の切り替え">
+        <button type="button" data-venue="kanseki" aria-pressed="true">カンスタ</button>
+        <button type="button" data-venue="green" aria-pressed="false">グリスタ</button>
+      </div>
+      <span class="vfull" id="venue-full">カンセキスタジアムとちぎ</span>
+    </div>
+  </div>
+</div>
+
+<!-- ============ ヘッダー ============ -->
+<header class="head">
+  <div class="wrap">
+    <h1 class="en">STADIUM<br><span class="yl">GUIDE</span></h1>
+    <p class="ja">栃木SC 観戦ガイド</p>
+    <p class="sub">はじめての方も、いつもの方も。スタジアムでの過ごし方をまとめた常設ガイドです。試合ごとの日程・イベントは各試合のホームゲームページをご覧ください。会場の切り替えは上の帯からできます。</p>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- ============ 1 アクセス（会場依存） ============ -->
+  <section class="sec" id="access">
+    <div class="kick">
+      <span class="ico"><svg viewBox="0 0 24 24"><path d="M5 17h14M6 17V9a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8"/><circle cx="8" cy="19" r="1.6"/><circle cx="16" cy="19" r="1.6"/><path d="M6 12h12"/></svg></span>
+      <span class="en">Access</span>
+      <span class="tag">会場で変わる</span>
+    </div>
+    <h2>アクセス・駐車場</h2>
+    <p class="desc">電車・バス・車、それぞれの行き方をご案内します。</p>
+
+    <!-- カンセキ -->
+    <div class="venue-block" data-venue="kanseki">
+      <div class="rows">
+        <div class="row"><div class="rk">路線バス</div><div class="rv">JR宇都宮駅西口から <b>約40分</b><span class="note">「総合運動公園西」下車</span></div></div>
+        <div class="row"><div class="rk">電車</div><div class="rv">東武宇都宮線 西川田駅から <b>徒歩約15分</b></div></div>
+        <div class="row"><div class="rk">シャトルバス</div><div class="rv">JR雀宮駅東口 ⇔ カンセキスタジアムとちぎ<span class="note">運賃：<b>往復500円／片道300円</b>（高校生以下無料）。お支払いは<b>現金のみ</b>（交通系ICカード不可）</span></div></div>
+        <div class="row"><div class="rk">お車</div><div class="rv">栃木県総合運動公園内駐車場／akippa事前予約駐車場<span class="note">駐車場料金・精算方法は現地案内をご確認ください</span></div></div>
+      </div>
+
+      <div class="band">シャトルバスの運行時間・発着場所、駐車場の運用は試合により異なる場合があります。詳細は<b>各試合のホームゲームページ</b>でご確認ください。</div>
+
+      <h3>駐車場利用についてのお願い</h3>
+      <p style="font-size:14px; margin:0">スタジアム周辺の商業施設や道路への駐車は、<b>絶対におやめください</b>。近隣の皆さまから、無断駐車・違法駐車に関するご意見を継続的にいただいています。ホームゲームは地域のご理解とご協力のもとで開催されています。これからも安心して試合を開催し続けるために、駐車マナーへのご協力をお願いします。</p>
+
+      <div class="ph">【画像枠】アクセスマップ<br>（宇都宮駅／雀宮駅からの経路・駐車場位置）</div>
+    </div>
+
+    <!-- グリーン -->
+    <div class="venue-block" data-venue="green">
+      <div class="rows">
+        <div class="row"><div class="rk">LRT</div><div class="rv">JR宇都宮駅東口から「グリーンスタジアム前」駅まで <b>約27分・片道300円</b><span class="note">交通系IC利用可。6〜10分間隔で運行</span></div></div>
+        <div class="row"><div class="rk">お車</div><div class="rv">駐車場 <b>約2,200台</b></div></div>
+        <div class="row"><div class="rk">自転車・バイク</div><div class="rv">駐輪の案内があります<span class="note">詳細は公式サイトの会場ページをご確認ください</span></div></div>
+        <div class="row"><div class="rk">シャトルバス</div><div class="rv"><b>運行なし</b><span class="note">カンセキスタジアムと異なり、雀宮駅シャトルはありません</span></div></div>
+      </div>
+
+      <div class="ph">【画像枠】アクセスマップ<br>（LRTグリーンスタジアム前駅・駐車場位置）</div>
+    </div>
+  </section>
+
+  <!-- ============ 2 キャッシュレス（共通） ============ -->
+  <section class="sec" id="cashless">
+    <div class="kick">
+      <span class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18"/><path d="M7 15h4"/></svg></span>
+      <span class="en">Cashless</span>
+    </div>
+    <h2>スタジアムは完全キャッシュレス</h2>
+    <p class="desc">スタジアム内のお買い物は、すべてキャッシュレス決済です（現金は使えません）。レジがスムーズで、待ち時間も短くなります。お使いの決済手段をご準備のうえ、ご来場ください。</p>
+
+    <h3>対象エリア</h3>
+    <p style="font-size:14.5px; margin:0 0 6px">飲食売店／グッズ売店／チケット売り場／CLUB.Tブース</p>
+    <ul class="plain">
+      <li>グッズ売店内のガチャガチャは<b>現金払いのみ</b>です。</li>
+      <li>イベント出店等のブースは「現金払いのみ」となる場合があります。</li>
+      <li>会場内でPayPayなどのQR決済や、Suica／nanaco／WAONの電子マネーの<b>チャージはできません</b>。</li>
+    </ul>
+
+    <h3>使用可能なキャッシュレス決済</h3>
+    <div class="logo-grid">
+      <span class="logo">ロゴ</span><span class="logo">ロゴ</span><span class="logo">ロゴ</span><span class="logo">ロゴ</span>
+      <span class="logo">ロゴ</span><span class="logo">ロゴ</span><span class="logo">ロゴ</span><span class="logo">ロゴ</span>
+      <span class="logo">ロゴ</span><span class="logo">ロゴ</span><span class="logo">ロゴ</span><span class="logo">ロゴ</span>
+    </div>
+    <p class="memo" style="margin-top:10px"><b>制作メモ：</b>対応ブランドの正式リストと各社ロゴデータの入手が必要です（各ブランドにロゴ使用規定あり）。枠数は仮で12。</p>
+
+    <h3>プリペイドカード（現金しか使えない方向け）</h3>
+    <p style="font-size:14px; margin:0 0 6px">キャッシュレス決済手段をお持ちでない方向けに、場内の発行機で現金をチャージして使えるプリペイドカードを用意しています。</p>
+    <div class="rows">
+      <div class="row"><div class="rk">栃木SC<br>オリジナルプリカ</div><div class="rv">グッズ売店でプリカ（500円）を購入し、チャージ機で現金をチャージして利用<span class="note">有効期限：最終利用日から10年間／払い戻し不可／店舗の決済端末にタッチして利用／栃木SCのホームゲームでのみ使用可</span></div></div>
+      <div class="row"><div class="rk">1Day Jプリカ</div><div class="rv">無料で発行できるレシートタイプ。チャージ機で発行し、現金をチャージして利用<span class="note">有効期限：当日限り／払い戻しはBゲートにて当日限り可（試合終了後30分まで）／店舗の決済端末にQRコードをかざして利用</span></div></div>
+    </div>
+    <div class="ph">【画像枠】プリペイドカード2種の見本<br>（オリジナルプリカ／1Day Jプリカ）</div>
+    <div class="ph">【画像枠】チャージ機のスタジアム内配置図<br>※動員見込みにより配置変更の場合あり</div>
+
+    <h3>よくある質問</h3>
+    <details>
+      <summary>プリカを失くしたら再発行や保証はありますか？</summary>
+      <div class="body"><p>再発行や保証はありません。自己責任でお取り扱いください。</p></div>
+    </details>
+    <details>
+      <summary>複数の決済方法を併用できますか？</summary>
+      <div class="body"><p>いいえ。一つの決済方法でのみ決済可能です。複数枚の「1Day Jプリカ」を合算して使うこともできません。</p></div>
+    </details>
+    <details>
+      <summary>電子マネーの残高照会はできますか？</summary>
+      <div class="body"><p>場内のチャージ機器、または各店舗の決済端末で残高照会が可能です。</p></div>
+    </details>
+    <div class="memo">プリペイドカードは、キャッシュレス決済のご利用が難しい方のための補助的な手段です。スムーズなお買い物のため、できるだけ普段お使いのキャッシュレス決済をご用意のうえご来場ください。</div>
+  </section>
+
+  <!-- ============ 3 入場・待機列（共通） ============ -->
+  <section class="sec" id="gate">
+    <div class="kick">
+      <span class="ico"><svg viewBox="0 0 24 24"><path d="M4 21V5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v16"/><path d="M2 21h20"/><path d="M14 12h.01"/><path d="M10 3v18"/></svg></span>
+      <span class="en">Entry</span>
+    </div>
+    <h2>入場・待機列</h2>
+    <p class="desc">開場前から並んで席を確保したい方向けのご案内です。指定席の方や、キックオフに合わせて来場する方は、この項目を読まなくても大丈夫です。</p>
+
+    <h3>待機列について</h3>
+    <ul class="plain">
+      <li>26/27シーズンでは「入場待機列事前申込み制度」は実施しません。</li>
+      <li>待機列では、お持ち込みいただいた折り畳み型の椅子やレジャーシートを利用できます。<b>縦・横ともに1m以内</b>のものをご使用ください。</li>
+    </ul>
+
+    <h3>シート貼りについて</h3>
+    <ul class="plain">
+      <li>シート貼りによる入場待機列の確保が可能です。使用するシートは<b>布テープまたは養生テープ</b>で固定してください。</li>
+      <li>1つのシートにつき<b>5名まで</b>待機列を確保できます（5名を超える場合はテープを分けて設置）。</li>
+      <li>シートには「<b>①待機列番号 ②代表者名 ③人数（5名まで）</b>」を必ずご記入ください。</li>
+      <li>割り込みや、シートに記載した人数を超える方を待機列へ加える行為は認められません。確認された場合は、関係者全員を列の最後尾へご案内する場合があります。</li>
+      <li>シート貼りに使用したテープは、入場前に必ずご自身で撤去してください。</li>
+      <li class="note" style="list-style:none; margin-left:-1.15em">※シートや荷物の盗難・紛失・破損、テープの剥がれ等について、クラブは一切の責任を負いません。</li>
+    </ul>
+
+    <div class="band">シート貼り開始時刻・入場時刻・列整理時刻などの運用は試合により異なります。詳細は<b>各試合のホームゲームページ</b>でご確認ください。</div>
+
+    <h3>よくある質問</h3>
+    <details>
+      <summary>ビン・缶の持ち込みはできますか？</summary>
+      <div class="body"><p>できません。場内で発見した場合は破棄等をお願いする場合があります。入場ゲート前での移し替えサービスは実施していないため、必要な場合は紙コップ等をご自身でご用意ください。</p></div>
+    </details>
+    <details>
+      <summary>何歳からチケットが必要ですか？</summary>
+      <div class="body"><p>小学生以上の方はチケットが必要です。未就学児は保護者の膝上で観戦する場合はチケット不要、座席を利用する場合はチケットをお買い求めください。マスコットやぬいぐるみ等で座席を使用する場合も、小中高チケットが必要です。</p></div>
+    </details>
+    <details>
+      <summary>ベビーカーは預かってもらえますか？</summary>
+      <div class="body"><p>ベビーカーやキャリーケース等、自席に収まらないサイズのお荷物は保管スペースを利用できます。入場ゲート係員へお声がけください。盗難・紛失等については責任を負いかねます。</p></div>
+    </details>
+  </section>
+
+  <!-- ============ 4 観戦ルール（共通） ============ -->
+  <section class="sec" id="rules">
+    <div class="kick">
+      <span class="ico"><svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg></span>
+      <span class="en">Rules & Manners</span>
+    </div>
+    <h2>観戦のルール・マナー</h2>
+    <p class="desc">スタジアムは、子どもから大人まで、みんなで試合を楽しむ場所です。すべての方に安全・快適に観戦いただくため、Jリーグ共通のルールに加えて、栃木SCの観戦ルール＆マナーを定めています。</p>
+    <p class="memo" style="margin:0 0 14px">スタジアム管理区域に入場された時点で、本ルールおよびJリーグ試合運営管理規程に同意いただいたものとみなします。<b>記載の有無にかかわらず、行為がルールに該当するかどうかの最終判断は、クラブまたはJリーグが行います。</b></p>
+
+    <details open>
+      <summary>持ち込み禁止物</summary>
+      <div class="body"><ul>
+        <li>ビン・缶類（入場ゲート前での移し替えサービスなし。紙コップ等はご自身でご用意ください）</li>
+        <li>ペット（盲導犬・介助犬・聴導犬を除く）</li>
+        <li>爆竹・花火・発煙筒・ガスホーン等の危険物</li>
+        <li>銃刀類・火器・毒劇物その他法令により所持・持ち込みが禁止されている物</li>
+        <li>椅子（車椅子を除く）</li>
+        <li>サッカーボール（ボールネットやバッグ等に収納した状態を除く）</li>
+        <li>ドローン等の無人航空機</li>
+        <li>その他、クラブが安全上支障があると判断した物</li>
+      </ul></div>
+    </details>
+
+    <details>
+      <summary>禁止行為（安全を損なう行為）</summary>
+      <div class="body"><ul>
+        <li>椅子に立ち上がっての観戦・応援</li>
+        <li>フェンス・手すりに腰掛ける、またがる、身を乗り出す、足を掛ける行為</li>
+        <li>場内を走り回る行為／観客席でのボール類の使用</li>
+        <li>通路に立ち止まっての観戦・写真撮影</li>
+        <li>仮設物の無断設置／危険物の使用</li>
+        <li>運営の妨げとなる行為（集団での抗議活動、バス止め等）</li>
+      </ul></div>
+    </details>
+
+    <details>
+      <summary>禁止行為（他のお客様の迷惑となる行為）</summary>
+      <div class="body"><ul>
+        <li>必要以上の座席の確保、荷物等を使用した長時間の座席確保</li>
+        <li>他のお客様の観戦を妨げる行為／通路や避難導線を塞ぐ行為</li>
+        <li>ごみを分別せず、指定場所以外へ廃棄する行為</li>
+        <li>スタジアム場外での鳴り物等の利用・集団での応援行為（バス待ち、決起集会等）</li>
+        <li>近隣住民への迷惑となる行為（21時以降の鳴り物の使用等）</li>
+      </ul></div>
+    </details>
+
+    <details>
+      <summary>写真・動画撮影について</summary>
+      <div class="body">
+        <div class="oxs">
+          <div>シーン</div><div class="c">写真</div><div class="c">動画</div>
+          <div>試合中（ピッチ上のプレー）</div><div class="c ok">〇</div><div class="c ng">✕</div>
+          <div>試合中以外（スタンド・コンコース・場外等）</div><div class="c ok">〇</div><div class="c ok">〇</div>
+        </div>
+        <ul style="margin-top:10px">
+          <li>試合中のピッチ上のプレーの動画撮影、SNS・動画配信サービス等での配信は禁止です。</li>
+          <li>撮影は一般のお客様が立ち入り可能なエリアに限ります。関係者エリア（選手・スタッフエリア等）を対象とした動画撮影は、一般エリアから見える場合でも禁止です（クラブが事前承認した場合を除く）。</li>
+          <li>三脚・一脚等の大型機材を使用した撮影は禁止です。</li>
+          <li>営利目的での写真・動画撮影は禁止です。</li>
+          <li>他のお客様の観戦や試合運営の妨げとなる撮影行為は禁止です。</li>
+          <li>Jリーグが定める「写真・動画等の撮影及び配信・送信規程」を遵守してください。</li>
+        </ul>
+      </div>
+    </details>
+
+    <details>
+      <summary>その他の禁止事項</summary>
+      <div class="body"><ul>
+        <li>選手・監督・審判・対戦クラブ・サポーター・スタッフ・ボランティア等への誹謗中傷、侮辱、威嚇、差別的言動、ハラスメント</li>
+        <li>拡声器の不正使用／レーザーポインター等、競技運営を妨げる機器の使用</li>
+        <li>承認を受けていないポスター・ビラ等の配布、掲示、募金活動、署名活動、物品販売</li>
+        <li>指定場所以外での喫煙</li>
+        <li>チケットに記載された席種・エリア以外での観戦</li>
+        <li>各入場ゲートの管理開始時刻以前に、荷物やシート等で場所を確保する行為（前日からの場所取りを含む）</li>
+        <li>その他、クラブが試合運営や安全確保の妨げになると判断した行為</li>
+      </ul></div>
+    </details>
+
+    <details>
+      <summary>違反行為への対応</summary>
+      <div class="body">
+        <p>ルールに違反する行為があった場合や、係員・警備員の指示に従っていただけない場合は、状況に応じて退場等の対応を行う場合があります。悪質な行為については、Jリーグ試合運営管理規程その他の関係規程に基づき、栃木SCホームゲームまたはJリーグ公式試合への入場禁止措置、関係機関への連絡等を行うことがあります。</p>
+        <p>ほとんどの方には関係のない項目です。すべての方が安心して観戦できるスタジアムを守るためのものとして、ご理解ください。</p>
+      </div>
+    </details>
+
+    <div class="ph">【画像枠】Jリーグ共通観戦ルール＆マナー 図版</div>
+  </section>
+
+  <!-- ============ 5 横断幕（会場依存＋共通） ============ -->
+  <section class="sec" id="banner">
+    <div class="kick">
+      <span class="ico"><svg viewBox="0 0 24 24"><path d="M4 4v17"/><path d="M4 5h15l-3 4 3 4H4"/></svg></span>
+      <span class="en">Banner</span>
+      <span class="tag">会場で変わる</span>
+    </div>
+    <h2>横断幕の掲出</h2>
+    <p class="desc">チームを後押しする横断幕を、みんなが気持ちよく掲げられるように、受付とルールをご案内します。</p>
+
+    <div class="venue-block" data-venue="kanseki">
+      <div class="rows">
+        <div class="row"><div class="rk">受付ゲート</div><div class="rv"><span class="vpill">カンスタ</span><br>ホーム側の事前掲出は <b>Cゲート</b>で受付</div></div>
+      </div>
+    </div>
+    <div class="venue-block" data-venue="green">
+      <div class="rows">
+        <div class="row"><div class="rk">受付ゲート</div><div class="rv"><span class="vpill">グリスタ</span><br>ホーム側の事前掲出は <b>北ゲート</b>で受付</div></div>
+      </div>
+    </div>
+
+    <h3>掲出のルール</h3>
+    <ul class="plain">
+      <li>横断幕は<b>指定されたエリアのみ</b>掲出できます。掲出は<b>先着順</b>です。</li>
+      <li>固定は<b>ひものみ</b>可能です（テープ類での固定は禁止）。</li>
+      <li>通路をまたぐ掲出は禁止です。座席への掲出も禁止です。</li>
+      <li>2層目ブロックは最前列手すり部分（手すりから2mまで）のみ、3層目ブロックは最前列手すり部分のみ掲出できます。</li>
+      <li>ビジター横断幕は一般開場後に指定エリアへ掲出してください。</li>
+      <li>バンデーラの掲出は、安全確保上の理由により制限する場合があります。</li>
+      <li>一部の試合では、座席運用等により掲出エリアを変更する場合があります。</li>
+    </ul>
+
+    <div class="band">事前掲出の受付時間や掲出エリアなど、試合ごとに変更となる場合があります。詳細は<b>各試合のホームゲームページ</b>でご確認ください。</div>
+
+    <div class="venue-block" data-venue="kanseki">
+      <div class="ph">【画像枠】横断幕掲出エリア図（カンセキスタジアム版）</div>
+    </div>
+    <div class="venue-block" data-venue="green">
+      <div class="ph">【画像枠】横断幕掲出エリア図（グリーンスタジアム版）</div>
+    </div>
+  </section>
+
+  <!-- ============ 6 ビジターの方へ（会場依存） ============ -->
+  <section class="sec" id="visitor">
+    <div class="kick">
+      <span class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c1.2-3.4 3.8-5 7-5s5.8 1.6 7 5"/></svg></span>
+      <span class="en">For Visitors</span>
+      <span class="tag">会場で変わる</span>
+    </div>
+    <h2>ビジターの方へ</h2>
+    <p class="desc">栃木SCのホームゲームへようこそ。アウェイからお越しの皆さまに、席種・入場・応援についてご案内します。</p>
+
+    <h3>ご案内</h3>
+    <ul class="plain">
+      <li>ビジターサポーターの方は、<b>ビジター観戦可能席種</b>をご購入ください。</li>
+      <li>入場は原則として<b>ビジターゲート</b>をご利用ください。</li>
+      <li>ホームゴール裏では<b>ビジターグッズの着用・使用はできません</b>。ホームゴール裏コンコースも、ビジターグッズを着用したままの通行はできません。</li>
+      <li>試合終了後の声出し応援は、自チーム選手がピッチから引き上げた時点で終了となります。</li>
+    </ul>
+
+    <h3>横断幕</h3>
+    <ul class="plain">
+      <li>指定された<b>ビジターエリア内</b>へ掲出してください。</li>
+      <li>固定はひものみ可能（テープ類禁止）。通路をまたぐ掲出は禁止です。</li>
+      <li>掲出時間・受付場所・運用方法は試合により異なる場合があります。詳細は各試合のホームゲームページをご確認ください。</li>
+    </ul>
+
+    <h3>ベンチ位置</h3>
+    <div class="venue-block" data-venue="kanseki">
+      <div class="rows">
+        <div class="row"><div class="rk">ベンチ位置</div><div class="rv"><span class="vpill">カンスタ</span><br>ビジターチームベンチは、メインスタンドから見て<b>左側</b></div></div>
+      </div>
+      <div class="ph">【画像枠】ビジターエリア・ベンチ位置図（カンセキスタジアム版）</div>
+    </div>
+    <div class="venue-block" data-venue="green">
+      <div class="rows">
+        <div class="row"><div class="rk">ベンチ位置</div><div class="rv"><span class="vpill">グリスタ</span><br>ビジターチームベンチは、メインスタンドから見て<b>右側</b></div></div>
+      </div>
+      <div class="ph">【画像枠】ビジターエリア・ベンチ位置図（グリーンスタジアム版）</div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="wrap">
+  <div class="rule">
+    栃木SC 観戦ガイド（プロトタイプ v8・文章編集版）／ 表示中の会場：<b id="venue-name-foot">カンセキスタジアムとちぎ</b><br>
+    ※本ガイドと各試合のホームゲームページの記載が異なる場合は、各試合ページの最新情報を優先します。<br>
+    ※画像枠には実データを差し込みます。決済ロゴ・掲出エリア図・アクセスマップは素材待ち。
+  </div>
+</footer>
+
+<script>
+(function(){
+  var blocks = Array.prototype.slice.call(document.querySelectorAll('.venue-block'));
+  var vbtns  = Array.prototype.slice.call(document.querySelectorAll('.vtoggle button'));
+  var NAMES  = { kanseki:'カンセキスタジアムとちぎ', green:'栃木県グリーンスタジアム' };
+
+  function apply(venue, animate){
+    if(venue !== 'kanseki' && venue !== 'green') venue = 'kanseki';
+    document.body.classList.toggle('is-green', venue === 'green');
+    blocks.forEach(function(el){
+      var on = el.dataset.venue === venue;
+      el.classList.toggle('is-on', on);
+      if(on && animate){
+        el.classList.remove('vb-anim');
+        void el.offsetWidth;
+        el.classList.add('vb-anim');
+      }
+    });
+    vbtns.forEach(function(b){
+      b.setAttribute('aria-pressed', b.dataset.venue === venue ? 'true' : 'false');
+    });
+    document.getElementById('venue-full').textContent = NAMES[venue];
+    document.getElementById('venue-name-foot').textContent = NAMES[venue];
+    try{
+      var url = new URL(window.location.href);
+      url.searchParams.set('venue', venue);
+      history.replaceState(null, '', url);
+    }catch(e){}
+  }
+
+  /* 切替＝追従帯のトグルのみ（常に画面内・位置不変） */
+  vbtns.forEach(function(b){
+    b.addEventListener('click', function(){ apply(b.dataset.venue, true); });
+  });
+
+  var initVenue = 'kanseki', backUrl = null;
+  try{
+    var sp = new URLSearchParams(window.location.search);
+    if(sp.get('venue')) initVenue = sp.get('venue');
+    backUrl = sp.get('back');
+  }catch(e){}
+  apply(initVenue, false);
+
+  if(backUrl && /^[\w./-]+\.html$/.test(backUrl)){
+    document.getElementById('lp-link').href = 'https://tochigisc-official.github.io/homegame/' + backUrl;
+  }
+
+  /* 追従ヘッダーの実高を計測して scroll-margin に反映 */
+  var stickyEl = document.getElementById('sticky-top');
+  function setStickyH(){
+    document.documentElement.style.setProperty('--sticky-h', stickyEl.offsetHeight + 'px');
+  }
+  window.addEventListener('resize', setStickyH);
+  if(document.fonts && document.fonts.ready){ document.fonts.ready.then(setStickyH); }
+  setStickyH();
+
+  /* ナビ右端フェード：末端で消す（見切れチップと併用のアフォーダンス） */
+  var scroller = document.querySelector('.nav-scroller');
+  var navEl = scroller.querySelector('nav');
+  function updateFade(){
+    var atEnd = navEl.scrollLeft + navEl.clientWidth >= navEl.scrollWidth - 4;
+    scroller.classList.toggle('at-end', atEnd);
+  }
+  navEl.addEventListener('scroll', updateFade, {passive:true});
+  window.addEventListener('resize', updateFade);
+  updateFade();
+
+  /* 現在地セクションのチップを紺反転＋ナビ内へ自動追い込み */
+  var links = Array.prototype.slice.call(document.querySelectorAll('.navbar nav a'));
+  var secs = links.map(function(a){ return document.querySelector(a.getAttribute('href')); });
+  if('IntersectionObserver' in window){
+    var cur = null;
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){ if(en.isIntersecting) cur = en.target.id; });
+      var changed = false;
+      links.forEach(function(a){
+        var on = a.getAttribute('href') === '#' + cur;
+        if(on && !a.classList.contains('is-active')) changed = true;
+        a.classList.toggle('is-active', on);
+      });
+      if(changed){
+        var act = document.querySelector('.navbar nav a.is-active');
+        if(act) act.scrollIntoView({behavior:'smooth', block:'nearest', inline:'center'});
+      }
+    }, { rootMargin:'-30% 0px -60% 0px' });
+    secs.forEach(function(s){ if(s) io.observe(s); });
+    /* ページ最下部では最終セクションを強制アクティブ（判定帯に届かない対策） */
+    window.addEventListener('scroll', function(){
+      if(window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 8){
+        links.forEach(function(a,i){ a.classList.toggle('is-active', i === links.length - 1); });
+      }
+    }, {passive:true});
+  }
+})();
+</script>
+
+</body>
+</html>
